@@ -1,6 +1,6 @@
 # CDC NT Transport Project — Session Context
 
-> Last updated: 2026-05-07
+> Last updated: 2026-05-07 (end of second session)
 
 ## Project overview
 
@@ -10,19 +10,19 @@
 - Database: CDC_NT | Warehouse schema: wh_cdc_nt
 - Tools: VS Code, pgAdmin 4, dbt, Power BI Desktop
 - dbt project path: C:\dbt\cdc_nt_gtfs
+- GitHub repo: https://github.com/Pheluciam/cdc-nt-gtfs-project (public)
 - Teaching preferences: see `TEACHING_PREFERENCES.md` for how Claude should work with me
 
 ## Working habits — standing reminders
 
 > Claude: surface these at the start of each session and prompt me when relevant.
 
+- **Pull at the start of each session** — `git pull` before making changes
 - **Git: commit regularly.** After every meaningful change (a fix, a new
   model, a working visual), do a `git add` + `git commit` with a clear
   message. Don't let work pile up uncommitted.
 - **Push to GitHub at the end of each session** so the remote repo reflects
   the latest progress (also acts as a backup).
-- **Pull at the start of each session** before making changes, in case
-  anything was committed elsewhere (e.g., from another machine).
 - **README stays current.** If today's session added a new model, dependency,
   or design decision, update `README.md` before pushing.
 - **LEARNINGS.md captures takeaways.** At the end of each session — or whenever
@@ -41,7 +41,7 @@ dim_routes, dim_service_calendar, dim_shapes, dim_stops, dim_trips
 Summary tables: route_kpis, trip_kpis, route_service_days,
 shape_summary, stop_activity_summary, trip_timebands
 
-## Surrogate key convention (added 2026-05-07)
+## Surrogate key convention
 
 Both source feeds (Darwin and Alice Springs) reuse the same numeric IDs
 for different real-world entities, causing duplicate keys when combined.
@@ -50,7 +50,7 @@ Resolution: composite surrogate keys built as `feed_id || '_' || natural_id`.
 Models updated:
 
 - dim_stops: added `stop_key` (e.g. `darwin_101`, `alice_springs_101`)
-- dim_agency: added `agency_key`
+- dim_agency: added `agency_key` and `agency_display_name` (clean labels: Darwin, Alice Springs)
 - fact_stop_times: added `stop_key` for matching dim_stops
 - dim_routes: added `agency_key` for matching dim_agency
 
@@ -79,61 +79,90 @@ Inactive (1):
 Star schema verified end-to-end via functional test (agency × route ×
 trip count, total = 2070, correctly distributed across both feeds).
 
-## Next steps
+## Git status
 
-### First priority — Git setup (do this before any further work)
+✅ Repo initialised, .gitignore configured (excludes .env, venvs, target,
+   TEACHING_PREFERENCES.md), first commit pushed to GitHub.
 
-Project is not currently version controlled. Plan for next session:
+Initial commit message: "Initial commit: GTFS ingestion, dbt warehouse with
+multi-feed surrogate keys, Power BI star schema"
 
-1. `git init` in `C:\dbt\cdc_nt_gtfs`
-2. Review `.gitignore` (already exists from dbt starter — confirm it excludes
-   `dbt_venv/`, `venv_ingestion/`, `target/`, `logs/`, `dbt_packages/`, any
-   credentials)
-3. First commit covering everything to date with a meaningful message
-   (e.g. "Initial commit: GTFS ingestion, dbt warehouse models, Power BI
-   star schema with multi-feed surrogate keys")
-4. Create GitHub repo (public, for portfolio visibility)
-5. Connect local repo to GitHub remote and push
-6. Write/expand `README.md` explaining: project goal, stack, data sources,
-   how to run, key design decisions (e.g., the surrogate key approach)
-7. Going forward: commit after every meaningful change, push regularly
+End-of-session-2 commit pending: needs `git add . && git commit -m "..."
+&& git push` covering today's dim_agency display name, LEARNINGS.md
+expansion, Power BI Overview page work.
 
-Honesty framing for hiring managers: this was the first project, so version
-control was introduced mid-project as a learning step. The pattern matters
-more than retroactive history.
+## Dashboard build status
 
-### Second priority — start building dashboard visuals
+**Locked-in structure:** 4 pages
 
-Decide on dashboard structure first, then build one page at a time.
+1. **Overview** — KPIs and headline framing
+2. **Network Coverage** — geographic / map page
+3. **Service Operations** — frequencies, calendars, time-of-day bands
+4. **Multi-Feed Comparison** — Darwin vs Alice Springs side-by-side
+   (showcases the multi-feed engineering work)
 
-Suggested page structure (pick what feels right):
+**Elevator pitch (used as Overview subtitle):**
+*"From raw CSVs to interactive dashboard: a complete data engineering
+workflow demonstrating ingestion (Python), warehouse modelling
+(dbt + PostgreSQL), and BI integration (Power BI), built around real-world
+public transport data."*
 
-1. **Overview / KPIs page**
-   - Card visuals: total routes, trips, stops, agencies, service days
-   - Map of stops (lat/lon already in dim_stops)
-   - Agency split (Darwin vs Alice Springs)
+### Page progress
 
-2. **Routes page**
-   - Trip counts per route (table or bar chart)
-   - Most-served vs least-served routes
-   - Service calendar per route (use route_service_days summary table)
+- ✅ **Page 1 — Overview** structurally complete
+  - Title + elevator pitch text boxes
+  - 5 KPI cards: Routes (83), Trips (2,070), Stops (768), Stop visits (~50k+), Agencies (2)
+  - Trips per Agency bar chart with custom colours per agency
+  - Uses `agency_display_name` (Darwin / Alice Springs) for clean labels
+  - Minor formatting polish still wanted but not blocking
+- ⬜ **Page 2 — Network Coverage** not started
+  - Title + subtitle to add
+  - Map visual: dim_stops by lat/lon, coloured by feed_id
+  - Supporting bars: Routes per Agency, Stops per Agency
+- ⬜ **Page 3 — Service Operations** not started
+  - Trips by day-of-week (use dim_calendar)
+  - Trips by time band (use trip_timebands summary)
+  - Weekday vs weekend split
+- ⬜ **Page 4 — Multi-Feed Comparison** not started
+  - Side-by-side KPIs (Darwin vs Alice Springs)
+  - Visual contrast — this is the headline page for the multi-feed engineering story
 
-3. **Stops page**
-   - Busiest stops (use stop_activity_summary)
-   - Stop locations on a map
-   - Trip pass-through counts
+## Next steps — pick up here next session
 
-4. **Service patterns page**
-   - Trips by day-of-week
-   - Trips by time-of-day band (use trip_timebands)
-   - Weekday vs weekend service comparison
+### Priority 1 — finish the dashboard
 
-5. **Comparison page (optional)**
-   - Darwin vs Alice Springs side-by-side metrics
+1. **Network Coverage (Page 2)** — title + subtitle + map (lat/lon from dim_stops, coloured by feed_id) + supporting bar charts (routes per agency, stops per agency)
+2. **Service Operations (Page 3)** — trips by day-of-week, trips by time band (trip_timebands), weekday vs weekend
+3. **Multi-Feed Comparison (Page 4)** — side-by-side KPIs and visuals contrasting Darwin and Alice Springs
+4. **Polish pass** — fonts, alignment, colours consistent across all 4 pages, page tab order correct
 
-Once structure is chosen, work one page at a time, verify after each.
+### Priority 2 — make the project shippable
+
+5. **README.md** — flesh out for hiring managers: overview, stack, architecture, how to run, key design decisions, screenshots of dashboard pages embedded
+6. **Dashboard screenshots** — export each page as PNG, embed in README
+7. **dbt tests** — add `unique` and `not_null` tests on every dim's primary key in `models/warehouse/warehouse_schema.yml`. The duplicate-key issue would have been caught by these. Strong DE signal
+8. **Final commit + push** — capture all dashboard work, README, screenshots, dbt tests in a clean commit. End-state for v1
+
+### Priority 3 — optional polish (when motivated)
+
+- Refactor surrogate keys to use `dbt_utils.generate_surrogate_key()`
+- Add basic GitHub Actions CI workflow (free DE signal)
+- Add architecture diagram to README
+
+### Priority 4 — leverage the project
+
+- Add to LinkedIn (Featured section, with screenshot + tagline + repo link)
+- Add to resume's Projects section
+- Pin the repo on GitHub profile
+- Prepare 2–3 interview stories from LEARNINGS — multi-feed key collision is the strongest
 
 ## Future projects planned
 
 Tableau, Snowflake, Airflow, Databricks, PySpark,
 AWS, Azure, Google Cloud, SQL Server
+
+**Headline plan for project #2:** cloud-native rebuild (Snowflake + Airflow)
+with orchestration as the headline feature. Apply carry-forward learnings
+from this project's `LEARNINGS.md`: Git from day 1, dbt tests early,
+naming conventions documented, source identifiers carried through every
+layer, dbt_utils.generate_surrogate_key from the start.

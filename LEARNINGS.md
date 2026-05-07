@@ -203,6 +203,44 @@ in DAX measures. Easy to revisit per-relationship if a specific need arises.
 
 ---
 
+## Pipeline orchestration (and why this v1 is manual)
+
+This project's pipeline is intentionally manual: I run Python ingestion,
+then `dbt run`, then refresh Power BI by hand. For a v1 portfolio piece,
+that's a deliberate scope decision — the goal here was to wire up the full
+stack end-to-end and prove every link works, not to automate operation.
+
+In a real production setting, manual operation isn't acceptable. The
+natural next step is orchestration via Airflow (or similar tool — Dagster,
+Prefect, or even cron with a shell script for a simpler version). The DAG
+would look like:
+
+1. Download latest GTFS feeds (Python task)
+2. Validate files exist and are well-formed (data quality check)
+3. Load to Postgres staging (Python ingestion)
+4. `dbt build` — runs models and tests in one step
+5. Refresh Power BI dataset via REST API
+6. Notify on success / failure (Slack or email)
+
+Schedule: monthly, since GTFS feeds typically publish a refresh each month
+with timetable updates.
+
+**Why I parked this for project #2 rather than adding it here:**
+
+- v1 was about getting the pipeline working end-to-end first. Orchestrating
+  something half-built would have been premature
+- Airflow setup adds substantial complexity (scheduler, web UI, often
+  Docker). Worth introducing as the headline feature of the next project
+  rather than a footnote in this one
+- For interview purposes, being able to articulate the orchestration
+  design — which I can — captures most of the value. Implementation comes
+  in project #2
+
+The cloud-native rebuild (planned project #2: Snowflake + Airflow) is the
+natural place for this to land as the headline feature.
+
+---
+
 ## What I'd do differently next time
 
 - **Set up Git from day 1.** Should not have to retroactively introduce
@@ -258,3 +296,6 @@ Things I want to do _from day one_ on the next project:
    sources.
 5. Naming conventions decided and documented before building models.
 6. Use `dbt_utils.generate_surrogate_key` instead of manual concatenation.
+7. **Orchestration from the start.** Airflow (or equivalent) DAG that runs
+   the pipeline end-to-end on a schedule, with proper failure handling and
+   notifications. Not a v2 thought — designed in from day one.

@@ -71,3 +71,5 @@ SELECT
 FROM wh_cdc_nt.dim_trips
 
 ORDER BY duplicates DESC, table_name;
+
+SELECT * FROM wh_cdc_nt.dim_agency LIMIT 100;
