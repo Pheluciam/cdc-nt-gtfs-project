@@ -1,0 +1,154 @@
+version: 2
+
+models:
+  - name: int_calendar_service
+    description: "Intermediate calendar service table with expanded service dates."
+    columns:
+      - name: feed_id
+        description: "Feed identifier."
+        tests:
+          - not_null
+
+      - name: service_id
+        description: "Service identifier."
+        tests:
+          - not_null
+
+      - name: date
+        description: "Service date."
+        tests:
+          - not_null
+
+      - name: is_service_day
+        description: "Indicates if service runs on this date."
+        tests:
+          - not_null
+
+  - name: int_routes
+    description: "Intermediate cleaned routes table."
+    columns:
+      - name: feed_id
+        description: "Feed identifier."
+        tests:
+          - not_null
+
+      - name: route_id
+        description: "Route identifier."
+        tests:
+          - not_null
+
+      - name: route_type
+        description: "Route type classification."
+        tests:
+          - not_null
+
+  - name: int_shapes
+    description: "Intermediate shapes table with ordered geometry points."
+    columns:
+      - name: feed_id
+        description: "Feed identifier."
+        tests:
+          - not_null
+
+      - name: shape_id
+        description: "Shape identifier."
+        tests:
+          - not_null
+
+      - name: shape_pt_lat
+        description: "Latitude of shape point."
+        tests:
+          - not_null
+
+      - name: shape_pt_lon
+        description: "Longitude of shape point."
+        tests:
+          - not_null
+
+      - name: shape_pt_sequence
+        description: "Sequence of shape point."
+        tests:
+          - not_null
+
+  - name: int_stop_times
+    description: "Intermediate stop times with corrected 24+ hour timestamps."
+    columns:
+      - name: feed_id
+        description: "Feed identifier."
+        tests:
+          - not_null
+
+      - name: trip_id
+        description: "Trip identifier."
+        tests:
+          - not_null
+
+      - name: stop_id
+        description: "Stop identifier."
+        tests:
+          - not_null
+
+      - name: stop_sequence
+        description: "Stop order within trip."
+        tests:
+          - not_null
+
+      - name: arrival_time
+        description: "Corrected arrival time (supports >24h GTFS)."
+        tests:
+          - not_null:
+              config:
+                where: "arrival_time IS NOT NULL"
+
+      - name: departure_time
+        description: "Corrected departure time (supports >24h GTFS)."
+        tests:
+          - not_null:
+              config:
+                where: "departure_time IS NOT NULL"
+
+  - name: int_stops
+    description: "Intermediate stops table with validated coordinates."
+    columns:
+      - name: feed_id
+        description: "Feed identifier."
+        tests:
+          - not_null
+
+      - name: stop_id
+        description: "Stop identifier."
+        tests:
+          - not_null
+
+      - name: stop_lat
+        description: "Stop latitude."
+        tests:
+          - not_null
+
+      - name: stop_lon
+        description: "Stop longitude."
+        tests:
+          - not_null
+
+  - name: int_trips
+    description: "Intermediate trips table with cleaned identifiers."
+    columns:
+      - name: feed_id
+        description: "Feed identifier."
+        tests:
+          - not_null
+
+      - name: trip_id
+        description: "Trip identifier."
+        tests:
+          - not_null
+
+      - name: route_id
+        description: "Route identifier."
+        tests:
+          - not_null
+
+      - name: service_id
+        description: "Service identifier."
+        tests:
+          - not_null

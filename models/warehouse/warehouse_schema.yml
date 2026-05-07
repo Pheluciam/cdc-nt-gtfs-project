@@ -1,0 +1,102 @@
+version: 2
+
+models:
+  - name: dim_agency
+    description: "Agency dimension table for CDC NT GTFS."
+
+  - name: dim_calendar
+    description: "Calendar dimension derived from GTFS service calendars."
+
+  - name: dim_calendar_dates
+    description: "Special service date overrides from GTFS calendar_dates."
+
+  - name: dim_date
+    description: "Generic date dimension for reporting."
+    columns:
+      - name: date
+        tests:
+          - not_null
+
+  - name: dim_routes
+    description: "Route dimension table with route-level attributes."
+    columns:
+      - name: route_id
+        tests:
+          - not_null
+
+  - name: dim_service_calendar
+    description: "Service calendar dimension combining base and exception dates."
+
+  - name: dim_shapes
+    description: "Shape dimension for route geometries."
+    columns:
+      - name: shape_id
+        tests:
+          - not_null
+
+  - name: dim_stops
+    description: "Stop dimension with stop locations and attributes."
+    columns:
+      - name: stop_id
+        tests:
+          - not_null
+
+  - name: dim_trips
+    description: "Trip dimension with trip-level attributes."
+    columns:
+      - name: trip_id
+        tests:
+          - not_null
+
+  - name: fact_route_summary
+    description: "Fact table summarising metrics at route level."
+
+  - name: fact_service_days
+    description: "Fact table of service days by route and date."
+
+  - name: fact_stop_sequences
+    description: "Fact table of ordered stop sequences per trip."
+
+  - name: fact_stop_times
+    description: "Fact table of stop times per trip and stop."
+    columns:
+      - name: trip_id
+        tests:
+          - relationships:
+              to: ref('dim_trips')
+              field: trip_id
+      - name: stop_id
+        tests:
+          - relationships:
+              to: ref('dim_stops')
+              field: stop_id
+
+  - name: fact_trips
+    description: "Fact table of trips with key metrics."
+    columns:
+      - name: trip_id
+        tests:
+          - not_null
+      - name: route_id
+        tests:
+          - relationships:
+              to: ref('dim_routes')
+              field: route_id
+
+  - name: route_kpis
+    description: "Pre-aggregated KPIs at route level."
+
+  - name: route_service_days
+    description: "Route-level service day coverage."
+
+  - name: shape_summary
+    description: "Summary metrics by shape."
+
+  - name: stop_activity_summary
+    description: "Stop-level activity metrics."
+
+  - name: trip_kpis
+    description: "Pre-aggregated KPIs at trip level."
+
+  - name: trip_timebands
+    description: "Trip metrics by time-of-day bands."

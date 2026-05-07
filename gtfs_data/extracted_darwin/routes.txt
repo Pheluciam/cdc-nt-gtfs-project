@@ -1,0 +1,76 @@
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+1-42,1,1,"Urban - Casuarina - Casuarina via Hospital & Tiwi",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+1h-42,1,1h,"Urban - Royal Darwin Hospital - Diabetes Aust",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+2-42,1,2,"Urban - Cas - Wanguri - Leanyer -Wulagi -Wagaman",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+3-42,1,3,"Urban - Casuarina - Alawa - Jingili - Moil - Anula",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+4-42,1,4,"Urban - Casuarina - Darwin via CDU & Nightcliff",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+5-42,1,5,"Urban - Cas - Marrara - Berrimah - Winnellie - Da",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+6-42,1,6,"Urban - Darwin - Museum - Fannie Bay - Parap",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+7-42,1,7,"Urban - Darwin - Stuart Park - Bayview",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+8-40,1,8,"Urban - Palmerston - Darwin via Stuart Highway",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+8-42,1,8,"Urban - Palmerston - Darwin via Stuart Highway",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+9-40,1,9,"Urban - Palmerston - Berrimah - Karama- Casuarina",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+9-42,1,9,"Urban - Palmerston - Berrimah - Karama- Casuarina",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+10-42,1,10,"Urban - Casuarina - Darwin via Bagot Rd",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+11-42,1,11,"Urban - Millner - Rapid Creek - Alawa",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+12-42,1,12,"Urban - Casuarina - Malak - Karama",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+14-42,1,14,"Urban - Darwin - Cullen Bay and Waterfront",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+15-40,1,15,"Urban - Darwin - Mindil - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+19-40,1,19,"Urban - Mindil Markets - Casuarina",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+21-42,1,21,"Urban - Hospital Precinct - Darwin Express",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+22-42,1,22,"Urban - Leanyer - Darwin Express",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+24-42,1,24,"Urban - Casuarina - Wanguri - Lyons - Muirhead",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+25-42,1,25,"Urban - Karama - Darwin Semi Express",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+28-42,1,28,"Urban - Humpty Doo - Coolalinga - Darwin Express",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+31-42,1,31,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+32-42,1,32,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+34-42,1,34,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+49-42,1,49,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+50-42,1,50,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+53-42,1,53,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+58-42,1,58,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+59-42,1,59,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+61-42,1,61,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+62-42,1,62,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+64-42,1,64,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+68-42,1,68,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+70-42,1,70,"Urban - Palmerston - Driver - Moulden",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+71-42,1,71,"Urban - Palmerston - Woodroffe - Gray",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+72-42,1,72,"Urban - Palmerston - Gunn - Bakewell - Rosebery",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+73-42,1,73,"Urban - Palmerston - Durack - CDU Palmerston",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+74-42,1,74,"Urban - Palmerston - Farrar - Johnston - Zuccoli",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+76-42,1,76,"Urban - Palm - Bakewell - Rosebery - Bellamack",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+77-42,1,77,"Urban - Palm - Indigenous Village - Rosebery- Bel",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+78-42,1,78,"Urban - Palmerston - Kokoda Industries",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+87-42,1,87,"Urban - Palmerston - Durack Heights",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+88-42,1,88,"Urban - Palmerston - Palmerston Regional Hospital",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+101-42,1,101,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+103-42,1,103,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+105-42,1,105,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+106-42,1,106,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+111-42,1,111,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+112-42,1,112,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+114-42,1,114,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+202-42,1,202,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+204-42,1,204,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+205-42,1,205,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+217-42,1,217,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+219-42,1,219,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+222-42,1,222,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+227-42,1,227,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+232-42,1,232,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+235-42,1,235,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+236-42,1,236,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+244-42,1,244,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+245-42,1,245,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+247-42,1,247,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+248-42,1,248,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+440-42,1,440,"Urban - Humpty Doo-Coolalinga-Virginia-Noonamah",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+445-42,1,445,"Urban - Humpty Doo-Cox Peninsula-Noonamah-Cool",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+446-42,1,446,"Urban - Bees Creek-Palmerston",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+447-42,1,447,"Urban - Humpty Doo-Mcminns-Howard Springs",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+450-42,1,450,"Urban - Humpty Doo-Girraween-Howard Springs-Plm",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+461-42,1,461,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+473-42,1,473,"School - Darwin",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+OL1-42,1,OL1,"Urban - Orbital 1",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF
+OL2-42,1,OL2,"Urban - Orbital 2",,3,http://www.transport.nt.gov.au/public-transport/public-bus-service/darwin,BD0021,FFFFFF

@@ -1,0 +1,23 @@
+name: cdc_nt_gtfs
+version: "1.0.0"
+config-version: 2
+profile: cdc_nt_gtfs
+model-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+models:
+  cdc_nt_gtfs:
+    staging:
+      +schema: stg_cdc_nt
+      +materialized: view
+    intermediate:
+      +schema: int_cdc_nt
+      +materialized: view
+    warehouse:
+      +schema: wh_cdc_nt
+      +materialized: view

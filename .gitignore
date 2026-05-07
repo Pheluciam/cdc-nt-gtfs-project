@@ -1,0 +1,35 @@
+# dbt artefacts (rebuilt every dbt run)
+target/
+dbt_packages/
+logs/
+
+# Python virtual environments (large, machine-specific)
+dbt_venv/
+venv_ingestion/
+venv/
+.venv/
+
+# Python compilation artefacts
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment / secrets — NEVER COMMIT
+.env
+.env.*
+*.secret
+profiles.yml
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Editor settings
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Personal — kept out of public repo
+TEACHING_PREFERENCES.md

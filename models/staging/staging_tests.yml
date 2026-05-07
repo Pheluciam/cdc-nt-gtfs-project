@@ -1,0 +1,186 @@
+version: 2
+
+models:
+  - name: stg_agency
+    description: "Staging model for GTFS agency information."
+    columns:
+      - name: agency_id
+        description: "Identifier for the transit agency."
+        tests: [not_null]
+
+      - name: agency_name
+        description: "Name of the transit agency."
+        tests: [not_null]
+
+      - name: feed_id
+        description: "Feed identifier used to group GTFS files."
+        tests: [not_null]
+
+  - name: stg_calendar
+    description: "Staging model for GTFS weekly service schedules."
+    columns:
+      - name: service_id
+        description: "Service identifier for a recurring weekly schedule."
+        tests: [not_null]
+
+      - name: monday
+        description: "Indicates if service runs on Monday."
+        tests: [not_null]
+
+      - name: tuesday
+        description: "Indicates if service runs on Tuesday."
+        tests: [not_null]
+
+      - name: wednesday
+        description: "Indicates if service runs on Wednesday."
+        tests: [not_null]
+
+      - name: thursday
+        description: "Indicates if service runs on Thursday."
+        tests: [not_null]
+
+      - name: friday
+        description: "Indicates if service runs on Friday."
+        tests: [not_null]
+
+      - name: saturday
+        description: "Indicates if service runs on Saturday."
+        tests: [not_null]
+
+      - name: sunday
+        description: "Indicates if service runs on Sunday."
+        tests: [not_null]
+
+      - name: start_date
+        description: "Start date for the weekly service schedule."
+        tests: [not_null]
+
+      - name: end_date
+        description: "End date for the weekly service schedule."
+        tests: [not_null]
+
+      - name: feed_id
+        description: "Feed identifier used to group GTFS files."
+        tests: [not_null]
+
+  - name: stg_calendar_dates
+    description: "Staging model for GTFS calendar exception dates."
+    columns:
+      - name: service_id
+        description: "Service identifier for the exception date."
+        tests: [not_null]
+
+      - name: date
+        description: "Date of the exception."
+        tests: [not_null]
+
+      - name: exception_type
+        description: "Indicates if service is added (1) or removed (2) on this date."
+        tests: [not_null]
+
+      - name: feed_id
+        description: "Feed identifier used to group GTFS files."
+        tests: [not_null]
+
+  - name: stg_routes
+    description: "Staging model for GTFS routes."
+    columns:
+      - name: route_id
+        description: "Identifier for the route."
+        tests: [not_null]
+
+      - name: route_type
+        description: "Type of route (bus, tram, ferry, etc.)."
+        tests: [not_null]
+
+      - name: feed_id
+        description: "Feed identifier used to group GTFS files."
+        tests: [not_null]
+
+  - name: stg_shapes
+    description: "Staging model for GTFS shapes representing route geometry."
+    columns:
+      - name: shape_id
+        description: "Identifier for the shape."
+        tests: [not_null]
+
+      - name: shape_pt_lat
+        description: "Latitude of the shape point."
+        tests: [not_null]
+
+      - name: shape_pt_lon
+        description: "Longitude of the shape point."
+        tests: [not_null]
+
+      - name: shape_pt_sequence
+        description: "Sequence number of the shape point."
+        tests: [not_null]
+
+      - name: feed_id
+        description: "Feed identifier used to group GTFS files."
+        tests: [not_null]
+
+  - name: stg_stop_times
+    description: "Staging model for GTFS stop times, representing stop order and timing."
+    columns:
+      - name: trip_id
+        description: "Trip identifier."
+        tests: [not_null]
+
+      - name: stop_id
+        description: "Stop identifier."
+        tests: [not_null]
+
+      - name: stop_sequence
+        description: "Order of the stop within the trip."
+        tests: [not_null]
+
+      - name: arrival_time
+        description: "Scheduled arrival time at the stop."
+        tests: [not_null]
+
+      - name: departure_time
+        description: "Scheduled departure time from the stop."
+        tests: [not_null]
+
+      - name: feed_id
+        description: "Feed identifier used to group GTFS files."
+        tests: [not_null]
+
+  - name: stg_stops
+    description: "Staging model for GTFS stops."
+    columns:
+      - name: stop_id
+        description: "Identifier for the stop."
+        tests: [not_null]
+
+      - name: stop_lat
+        description: "Latitude of the stop."
+        tests: [not_null]
+
+      - name: stop_lon
+        description: "Longitude of the stop."
+        tests: [not_null]
+
+      - name: feed_id
+        description: "Feed identifier used to group GTFS files."
+        tests: [not_null]
+
+  - name: stg_trips
+    description: "Staging model for GTFS trips."
+    columns:
+      - name: trip_id
+        description: "Identifier for the trip."
+        tests: [not_null]
+
+      - name: route_id
+        description: "Route identifier associated with the trip."
+        tests: [not_null]
+
+      - name: service_id
+        description: "Service identifier associated with the trip."
+        tests: [not_null]
+
+      - name: feed_id
+        description: "Feed identifier used to group GTFS files."
+        tests: [not_null]

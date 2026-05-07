@@ -1,0 +1,10 @@
+
+route_id,agency_id,route_short_name,route_long_name,route_desc,route_type,route_url,route_color,route_text_color
+1490,1,AS100,Braitling and Ciccone,,3,http://www.transport.nt.gov.au/public/bus/alice,004C5B,FFFFFF
+1537,1,AS101,Braitling and Ciccone,,3,http://www.transport.nt.gov.au/public/bus/alice,004C5B,FFFFFF
+1586,1,AS200,East Side and Sadadeen,,3,http://www.transport.nt.gov.au/public/bus/alice,004C5B,FFFFFF
+1665,1,AS300,"The Gap, Ross and Ilparpa",,3,http://www.transport.nt.gov.au/public/bus/alice,004C5B,FFFFFF
+1868,1,AS301,"The Gap, Ross and Ilparpa",,3,http://www.transport.nt.gov.au/public/bus/alice,004C5B,FFFFFF
+2093,1,AS400,"Gillen, Araluen and Larapinta",,3,http://www.transport.nt.gov.au/public/bus/alice,004C5B,FFFFFF
+2154,1,AS401,"Gillen, Araluen, and Larapinta ",,3,http://www.transport.nt.gov.au/public/bus/alice,004C5B,FFFFFF
+2295,1,AS500,Gillen and Alice Springs Hospital,,3,http://www.transport.nt.gov.au/public/bus/alice,004C5B,FFFFFF

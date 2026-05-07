@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: cdc_nt
+    schema: cdc_nt
+    tables:
+      - name: agency
+      - name: calendar
+      - name: calendar_dates
+      - name: feed_info
+      - name: routes
+      - name: shapes
+      - name: stops
+      - name: stop_times
+      - name: trips

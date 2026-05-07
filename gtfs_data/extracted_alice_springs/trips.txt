@@ -1,0 +1,64 @@
+route_id,service_id,trip_id,trip_headsign,direction_id,block_id,shape_id
+1537,1,3735,"Braitling and Ciccone",1,,1538
+1537,1,3783,"Braitling and Ciccone",1,,1538
+1537,1,3831,"Braitling and Ciccone",1,,1538
+1537,1,3879,"Braitling and Ciccone",1,,1538
+1490,2,3928,"Braitling and Ciccone",1,,1491
+1490,2,3974,"Braitling and Ciccone",1,,1491
+1537,2,4020,"Braitling and Ciccone",1,,1538
+1537,2,4068,"Braitling and Ciccone",1,,1538
+1537,2,4116,"Braitling and Ciccone",1,,1538
+1490,2,4164,"Braitling and Ciccone",1,,1491
+1490,2,4210,"Braitling and Ciccone",1,,1491
+1490,2,4256,"Braitling and Ciccone",1,,1491
+1490,2,4302,"Braitling and Ciccone",1,,1491
+1586,1,4349,"Eastside and Sadadeen",1,,1587
+1586,1,4389,"Eastside and Sadadeen",1,,1587
+1586,1,4429,"Eastside and Sadadeen",1,,1587
+1586,1,4469,"Eastside and Sadadeen",1,,1587
+1586,2,4510,"Eastside and Sadadeen",1,,1587
+1586,2,4550,"Eastside and Sadadeen",1,,1587
+1586,2,4590,"Eastside and Sadadeen",1,,1587
+1586,2,4630,"Eastside and Sadadeen",1,,1587
+1586,2,4670,"Eastside and Sadadeen",1,,1587
+1586,2,4710,"Eastside and Sadadeen",1,,1587
+1586,2,4750,"Eastside and Sadadeen",1,,1587
+1586,2,4790,"Eastside and Sadadeen",1,,1587
+1586,2,4830,"Eastside and Sadadeen",1,,1587
+1868,1,4871,"The Gap, Ross and Ilparpa",1,,1981
+1868,1,4925,"The Gap, Ross and Ilparpa",1,,1981
+1868,1,4979,"The Gap, Ross and Ilparpa",1,,1981
+1868,1,5033,"The Gap, Ross and Ilparpa",1,,1981
+1665,2,5088,"The Gap, Ross and Ilparpa",1,,1764
+1665,2,5140,"The Gap, Ross and Ilparpa",1,,1764
+1868,2,5192,"The Gap, Ross and Ilparpa",1,,1981
+1868,2,5246,"The Gap, Ross and Ilparpa",1,,1981
+1868,2,5300,"The Gap, Ross and Ilparpa",1,,1981
+1868,2,5354,"The Gap, Ross and Ilparpa",1,,1981
+1868,2,5408,"The Gap, Ross and Ilparpa",1,,1981
+1665,2,5462,"The Gap, Ross and Ilparpa",1,,1764
+1665,2,5514,"The Gap, Ross and Ilparpa",1,,1764
+1665,2,5566,"The Gap, Ross and Ilparpa",1,,1764
+2154,1,5619,"Gillen, Araluen and Larapinta",1,,2223
+2154,1,5691,"Gillen, Araluen and Larapinta",1,,2223
+2154,1,5763,"Gillen, Araluen and Larapinta",1,,2223
+2154,1,5835,"Gillen, Araluen and Larapinta",1,,2223
+2093,2,5908,"Gillen, Araluen and Larapinta",1,,2094
+2093,2,5968,"Gillen, Araluen and Larapinta",1,,2094
+2154,2,6028,"Gillen, Araluen and Larapinta",1,,2223
+2154,2,6100,"Gillen, Araluen and Larapinta",1,,2223
+2154,2,6172,"Gillen, Araluen and Larapinta",1,,2223
+2154,2,6244,"Gillen, Araluen and Larapinta",1,,2223
+2093,2,6316,"Gillen, Araluen and Larapinta",1,,2094
+2093,2,6376,"Gillen, Araluen and Larapinta",1,,2094
+2093,2,6436,"Gillen, Araluen and Larapinta",1,,2094
+2295,1,6497,"Gillen and Alice Springs Hospital",1,,2296
+2295,1,6521,"Gillen and Alice Springs Hospital",1,,2296
+2295,1,6545,"Gillen and Alice Springs Hospital",1,,2296
+2295,1,6569,"Gillen and Alice Springs Hospital",1,,2296
+2295,2,6594,"Gillen and Alice Springs Hospital",1,,2296
+2295,2,6618,"Gillen and Alice Springs Hospital",1,,2296
+2295,2,6642,"Gillen and Alice Springs Hospital",1,,2296
+2295,2,6666,"Gillen and Alice Springs Hospital",1,,2296
+2295,2,6690,"Gillen and Alice Springs Hospital",1,,2296
+2295,2,6714,"Gillen and Alice Springs Hospital",1,,2296

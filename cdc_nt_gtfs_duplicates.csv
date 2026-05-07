@@ -1,0 +1,8 @@
+"table_name","key_col","total_rows","distinct_keys","duplicates"
+"dim_stops","stop_id",768,693,75
+"dim_agency","agency_id",2,1,1
+"dim_calendar","service_id",10,10,0
+"dim_date","date",1826,1826,0
+"dim_routes","route_id",83,83,0
+"dim_service_calendar","service_id",10,10,0
+"dim_trips","trip_id",2070,2070,0

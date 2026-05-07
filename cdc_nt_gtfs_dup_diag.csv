@@ -1,0 +1,21 @@
+"stop_key","stop_id","stop_code","stop_name","stop_desc","stop_lat","stop_lon","zone_id","stop_url","location_type","parent_station"
+"101","101",NULL,"Charles Darwin University, Casuarina",NULL,"-12.372757","130.870636",NULL,NULL,"0",NULL
+"101","101","1020","Stuart Highway",NULL,"-23.69009","133.876109",NULL,NULL,NULL,NULL
+"103","103",NULL,"39 Stuart Hwy",NULL,"-12.44831","130.840893",NULL,NULL,"0",NULL
+"103","103","1072","Gap Road",NULL,"-23.709774","133.877297",NULL,NULL,NULL,NULL
+"104","104","1073","Gap Road",NULL,"-23.713634","133.874694",NULL,NULL,NULL,NULL
+"104","104",NULL,"Stuart Hwy at St Johns College",NULL,"-12.443017","130.84116",NULL,NULL,"0",NULL
+"105","105",NULL,"Stuart Hwy after Nylander St",NULL,"-12.439078","130.84097",NULL,NULL,"0",NULL
+"105","105","1075","Gap Road",NULL,"-23.717359","133.871806",NULL,NULL,NULL,NULL
+"107","107",NULL,"Stuart Hwy after Ross Smith Ave",NULL,"-12.432644","130.849501",NULL,NULL,"0",NULL
+"107","107","1077","Palm Cct after Bonanni Cct",NULL,"-23.729688","133.866454",NULL,NULL,NULL,NULL
+"108","108","1078","Palm Cct after Palm Pl",NULL,"-23.73335","133.86795",NULL,NULL,NULL,NULL
+"108","108",NULL,"Bagot Rd at Ludmilla School",NULL,"-12.424668","130.856089",NULL,NULL,"0",NULL
+"109","109","1079","Old Timers",NULL,"-23.741976","133.868708",NULL,NULL,NULL,NULL
+"109","109",NULL,"Bagot Rd at Mosec Park",NULL,"-12.420362","130.85608",NULL,NULL,"0",NULL
+"110","110","1090","Gap road",NULL,"-23.717359","133.871668",NULL,NULL,NULL,NULL
+"110","110",NULL,"Bagot Rd (before 163)",NULL,"-12.412767","130.85597",NULL,NULL,"0",NULL
+"112","112","1092","Gap Road",NULL,"-23.713407","133.874704",NULL,NULL,NULL,NULL
+"112","112",NULL,"Bagot Rd before Old McMillans Rd",NULL,"-12.396124","130.855906",NULL,NULL,"0",NULL
+"113","113",NULL,"Bagot Rd before Easther Ct",NULL,"-12.391399","130.855911",NULL,NULL,"0",NULL
+"113","113","1093","Gap Road",NULL,"-23.709892","133.87706",NULL,NULL,NULL,NULL

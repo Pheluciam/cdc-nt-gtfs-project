@@ -1,0 +1,670 @@
+stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,zone_id,stop_url,location_type
+004,,"Trower Road after Bradshaw Terrace",, -12.369522, 130.883003,,,0
+005,,"Delamere Street before Wangalara Street",, -12.366872, 130.881220,,,0
+006,,"8 Willeroo Street",, -12.364839, 130.884178,,,0
+007,,"75 Henbury Avenue",, -12.361667, 130.885637,,,0
+008,,"Darwin Private Hospital",, -12.358594, 130.882803,,,0
+009,,"Royal Darwin Hospital",, -12.355985, 130.882798,,,0
+01,,"Darwin Harry Chan Ave",, -12.464786, 130.844340,,,0
+011,,"10 Manbulloo Street",, -12.360410, 130.880367,,,0
+012,,"Tiwi Gardens before Tiwi Place",, -12.362257, 130.876928,,,0
+013,,"4 Erldunda Street",, -12.365271, 130.876145,,,0
+014,,"Trower Road after Ellengowan Drive",, -12.365334, 130.872831,,,0
+015,,"13 Omeo Street",, -12.367038, 130.871353,,,0
+016,,"51 Ellengowan Drive",, -12.366709, 130.873853,,,0
+017,,"opp 21 Macredie St",, -12.369518, 130.875639,,,0
+018,,"29 Buchanan Tce",, -12.371672, 130.874692,,,0
+019,,"6 Ellengowan Drive",, -12.372502, 130.872485,,,0
+020,,"86 Dripstone Road",, -12.373703, 130.873830,,,0
+021,,"Dripstone Rd before Goodman St",, -12.375271, 130.875926,,,0
+023,,"Angelo St before Gsell St",, -12.373489, 130.885145,,,0
+024,,"51 Gsell Street",, -12.370572, 130.886256,,,0
+025,,"Tambling Tce before Danimila Tce",, -12.366077, 130.889341,,,0
+026,,"74 Wanguri Tce",, -12.369047, 130.889489,,,0
+027,,"8 Canaris St",, -12.370738, 130.890592,,,0
+029,,"5 VRD Dve",, -12.368871, 130.893059,,,0
+030,,"VRD Drive before Rosewood Cres",, -12.370662, 130.896982,,,0
+032,,"Leanyer Drive at Baines St Park",, -12.372540, 130.899592,,,0
+033,,"125 Leanyer Dr",, -12.375419, 130.900558,,,0
+034,,"151 Leanyer Dve",, -12.378024, 130.901912,,,0
+035,,"Leanyer Dve after Parkside Cres",, -12.380180, 130.903460,,,0
+036,,"opp 182 Leanyer Dve",, -12.382051, 130.902512,,,0
+037,,"Vanderlin Dve after Leanyer Dve",, -12.383642, 130.902643,,,0
+038,,"58 Patterson Street",, -12.386699, 130.903373,,,0
+039,,"68 Wulagi Cres",, -12.384784, 130.899497,,,0
+040,,"Brolga St opp Shops",, -12.383873, 130.894024,,,0
+041,,"34 Jabiru St",, -12.381630, 130.894320,,,0
+042,,"8 Jabiru St",, -12.380821, 130.891361,,,0
+043,,"Wagaman Tce at Shops",, -12.380316, 130.886812,,,0
+044,,"opp 56 Wagaman Tce",, -12.379656, 130.883721,,,0
+046,,"Trower Rd after Linton St",, -12.373753, 130.883268,,,0
+047,,"9 Scaturchio St",, -12.372131, 130.882065,,,0
+049,,"Trower Rd before Carstens Cres",, -12.380400, 130.880643,,,0
+050,,"Trower Rd after Parer Dr",, -12.382304, 130.878545,,,0
+051,,"Trower Rd before Jingili Cres",, -12.383079, 130.874811,,,0
+052,,"72 Jingili Tce",, -12.384236, 130.873695,,,0
+053,,"opp 49 Jingili Tce",, -12.386596, 130.873331,,,0
+055,,"9 Scales St",, -12.390087, 130.878848,,,0
+057,,"Lee Point Rd after Moil Cres",, -12.390722, 130.883987,,,0
+058,,"15 Yanyula Drive",, -12.389789, 130.887219,,,0
+060,,"3 Springhill St",, -12.391938, 130.894874,,,0
+061,,"Matthews Rd at Yanyula Greenbelt",, -12.390108, 130.896542,,,0
+062,,"Union Terrace",, -12.388388, 130.895858,,,0
+063,,"Union Tce before Copperfield Cres",, -12.387724, 130.893137,,,0
+064,,"24 Union Terrace",, -12.386096, 130.890246,,,0
+065,,"Parer Drive after Greenwood Cres",, -12.385800, 130.885411,,,0
+066,,"43 Parer Drive",, -12.383977, 130.882278,,,0
+067,,"Parer Dr at Casuarina Senior College",, -12.382978, 130.880928,,,0
+068,,"211 Trower Rd after Alawa Crescent",, -12.379790, 130.880922,,,0
+072,,"81 Cavenagh St",, -12.457438, 130.837730,,,0
+073,,"121 Mitchell St",, -12.457540, 130.833976,,,0
+074,,"Mitchell St before Malabar St",, -12.455356, 130.831742,,,0
+075,,"Mitchell St before Lambell Tce",, -12.453731, 130.830053,,,0
+076,,"Gilruth Ave at Casino",, -12.449391, 130.831612,,,0
+077,,"Gilruth Ave at Mindil Beach",, -12.445950, 130.833326,,,0
+078,,"East Point Rd after Conacher St",, -12.435441, 130.837850,,,0
+079,,"East Point Rd before Atkins Dve",, -12.430741, 130.837062,,,0
+080,,"opp 6 Dick Ward Dr, Fannie Bay",, -12.424453, 130.839989,,,0
+081,,"Dick Ward Drive at Minmarama Park",, -12.411856, 130.850282,,,0
+082,,"Dick Ward Drive before Caryota Ct",, -12.400569, 130.852237,,,0
+083,,"Dick Ward Drive opp Radford Ct",, -12.397541, 130.852267,,,0
+084,,"Dick Ward Drive opp Musgrave Cres",, -12.393400, 130.852249,,,0
+085,,"Dick Ward Drive at Shopping Centre",, -12.390078, 130.852197,,,0
+087,,"11 Bougainvilia Street",, -12.386211, 130.848251,,,0
+088,,"27 Bougainvilia Street",, -12.384232, 130.848227,,,0
+089,,"47 Bougainvilia Street",, -12.381269, 130.847713,,,0
+090,,"Aralia St before Jacaranda Ave",, -12.379518, 130.848208,,,0
+091,,"Ryland Rd after Nightcliff Rd",, -12.379339, 130.852044,,,0
+092,,"144 Ryland Road",, -12.378910, 130.857103,,,0
+093,,"122 Ryland Road",, -12.381113, 130.859260,,,0
+094,,"100 Ryland Road",, -12.383453, 130.860278,,,0
+095,,"82 Ryland Road",, -12.385693, 130.860993,,,0
+096,,"Trower Rd opp Rapid Creek Shops",, -12.385866, 130.862775,,,0
+097,,"Trower Rd opp Water Gardens",, -12.384514, 130.867233,,,0
+098,,"opp 14 Lakeside Drive",, -12.381956, 130.868784,,,0
+099,,"opp 46 Lakeside Drive",, -12.378203, 130.870304,,,0
+100,,"opp 68 Lakeside Drive",, -12.376318, 130.872478,,,0
+101,,"Charles Darwin University, Casuarina",, -12.372757, 130.870636,,,0
+103,,"39 Stuart Hwy",, -12.448310, 130.840893,,,0
+104,,"Stuart Hwy at St Johns College",, -12.443017, 130.841160,,,0
+105,,"Stuart Hwy after Nylander St",, -12.439078, 130.840970,,,0
+106,,"Stuart Hwy after Parap Rd",, -12.435450, 130.844143,,,0
+107,,"Stuart Hwy after Ross Smith Ave",, -12.432644, 130.849501,,,0
+108,,"Bagot Rd at Ludmilla School",, -12.424668, 130.856089,,,0
+109,,"Bagot Rd at Mosec Park",, -12.420362, 130.856080,,,0
+110,,"Bagot Rd (before 163)",, -12.412767, 130.855970,,,0
+112,,"Bagot Rd before Old McMillans Rd",, -12.396124, 130.855906,,,0
+113,,"Bagot Rd before Easther Ct",, -12.391399, 130.855911,,,0
+114,,"Trower Rd at St Paul's Primary",, -12.387503, 130.858682,,,0
+115,,"135 Trower Rd after Iris St",, -12.383405, 130.871447,,,0
+116,,"Trower Rd before Styles St",, -12.382767, 130.874971,,,0
+118,,"Vanderlin Drive after Gsell St",, -12.376619, 130.885846,,,0
+119,,"Vanderlin Drive before Lee Point Rd",, -12.377198, 130.889537,,,0
+120,,"Vanderlin Dr at Hibiscus Shops",, -12.378625, 130.896195,,,0
+121,,"28 Patterson St",, -12.389223, 130.900339,,,0
+122,,"52 Darwent St",, -12.391359, 130.899403,,,0
+123,,"Darwent St after Radge Ct",, -12.395450, 130.900736,,,0
+124,,"Chambers Cres at Malak Shops",, -12.397174, 130.904005,,,0
+125,,"Chambers Cres opp Osborn Rd",, -12.397744, 130.905823,,,0
+126,,"3 Paqualin Road",, -12.399510, 130.908205,,,0
+127,,"7 Koolinda Crescent",, -12.398408, 130.910500,,,0
+128,,"46 Karama Crescent",, -12.399582, 130.912088,,,0
+129,,"20 Karama Crescent",, -12.400405, 130.914191,,,0
+130,,"Kalymnos Dr at Karama Shops",, -12.401703, 130.915887,,,0
+131,,"46 Koolinda Crescent",, -12.399281, 130.915147,,,0
+132,,"24 Livistona Road",, -12.396355, 130.913331,,,0
+133,,"12 Calytrix Rd",, -12.395311, 130.910841,,,0
+134,,"69 Mueller Rd",, -12.393471, 130.909612,,,0
+135,,"58 Dalwood Crescent",, -12.391840, 130.909037,,,0
+136,,"Dalwood Cres after Wescombe Ct",, -12.389183, 130.906530,,,0
+137,,"14 Dalwood Crescent",, -12.388463, 130.904288,,,0
+138,,"Malak Cres before Patterson St",, -12.388668, 130.901517,,,0
+139,,"43 Patterson Street",, -12.387091, 130.902233,,,0
+140,,"142 Vanderlin Drive Service Road",, -12.381959, 130.899753,,,0
+141,,"116 Vanderlin Dve Service Road",, -12.380222, 130.897482,,,0
+142,,"96 Vanderlin Dve Service Rd opp Shops",, -12.378537, 130.895025,,,0
+143,,"58 Vanderlin Dve",, -12.377553, 130.889606,,,0
+144,,"28 Vanderlin Dve",, -12.376925, 130.885815,,,0
+148,,"Forrest Pde before McAulay St",, -12.511667, 130.988461,,,0
+149,,"128 Trower Rd, opp Iris St",, -12.383718, 130.871045,,,0
+150,,"Trower Rd at Water Gardens",, -12.384849, 130.867071,,,0
+151,,"opp 49 Rapid Creek Road",, -12.387489, 130.864642,,,0
+1511,,"Farrar Blvd before Nutwood Cres",, -12.479489, 130.995961,,,0
+1512,,"137 Farrar Blvd",, -12.484515, 131.002489,,,0
+1513,,"Farrar Blvd before Henry Rd",, -12.488015, 131.003938,,,0
+1514,,"Farrar Blvd after George Park",, -12.493544, 131.005915,,,0
+1515,,"Farrar Blvd before MacKillop Ct",, -12.496908, 131.007021,,,0
+1516,,"Zuccoli Schools",, -12.511973, 131.007402,,,0
+1518,,"Sattler Crescent",, -12.540627, 131.054352,,,0
+1519,,"Farrar Blvd after Kettle St",, -12.478489, 130.994190,,,0
+152,,"Rapid Creek Rd opp Robinson Rd",, -12.390099, 130.866825,,,0
+1520,,"93 Farrar Blvd",, -12.479743, 131.001912,,,0
+1521,,"129 Zuccoli Parade",, -12.511648, 131.007518,,,0
+1523,,"Nichols St. Durack Heights",, -12.471540, 130.974088,,,0
+153,,"18 Rapid Creek Road",, -12.393154, 130.868885,,,0
+1538,,"Chong Wee Ave before Trochus Cres",, -12.436017, 130.850613,,,0
+154,,"opp 195 McMillans Service Road",, -12.395210, 130.866797,,,0
+1543,,"Tuckeroo Blvd opp Hamster Wheel Park",, -12.507492, 131.003607,,,0
+1548,,"Tiwi Gardens at Seniors Village",, -12.361738, 130.879637,,,0
+1549,,"RDH opp Alan Walker Centre",, -12.353995, 130.883015,,,0
+155,,"Sabine Rd before Tong Luck St",, -12.393491, 130.861330,,,0
+1556,,"Zuccoli Pde at Oatgrass St",, -12.515221, 131.008680,,,0
+1557,,"Silverleaf Rd after Billygoat St",, -12.518344, 131.005737,,,0
+1558,,"Silverleaf Rd after Vitex St",, -12.517965, 131.009018,,,0
+156,,"19 Robinson Road",, -12.391326, 130.862841,,,0
+1561,,"33 Baldwin Drive",, -12.500266, 130.979010,,,0
+1562,,"69 Sibblald Crescent",, -12.502140, 130.983969,,,0
+157,,"33 Ryland Road",, -12.389764, 130.862643,,,0
+158,,"55 Ryland Road",, -12.387285, 130.861517,,,0
+159,,"11 Cummins Street",, -12.386488, 130.857442,,,0
+160,,"Francis St before Trower Rd",, -12.386764, 130.859099,,,0
+161,,"7 Alawa Crescent",, -12.382012, 130.872261,,,0
+162,,"33 Alawa Crescent",, -12.379816, 130.873052,,,0
+163,,"Alawa Cres after Eric St",, -12.378190, 130.875168,,,0
+164,,"5 Scriven Street",, -12.377259, 130.876602,,,0
+166,,"Trower Rd at Rapid Creek Shops",, -12.386320, 130.862187,,,0
+167,,"18 Trower Rd after Sabine Rd",, -12.388083, 130.858118,,,0
+168,,"Bagot Rd after Harris St",, -12.394086, 130.856148,,,0
+169,,"Trower Rd after McMillans Rd",, -12.400990, 130.856230,,,0
+170,,"Bagot Rd opp 169",, -12.411910, 130.856279,,,0
+171,,"Bagot Rd opp Mosec Park",, -12.420680, 130.856305,,,0
+172,,"Bagot Rd opp Ludmilla Primary",, -12.424017, 130.856319,,,0
+173,,"Stuart Hwy after Woolner Rd",, -12.433913, 130.847515,,,0
+174,,"Stuart Hwy opp Parap Rd",, -12.436649, 130.843019,,,0
+175,,"Stuart Hwy before Westralia St",, -12.444486, 130.841202,,,0
+176,,"Stuart Hwy after King St",, -12.449647, 130.841134,,,0
+177,,"30 Daly St",, -12.457283, 130.836728,,,0
+178,,"Mitchell St cnr Brigg St",, -12.460942, 130.837650,,,0
+179,,"Mitchell St, Hilton Hotel",, -12.464934, 130.841785,,,0
+181,,"Stuart Hwy before Shiers St",, -12.428021, 130.859693,,,0
+182,,"Stuart Hwy before Winnellie Shops",, -12.426929, 130.862015,,,0
+183,,"383 Stuart Highway",, -12.425424, 130.867095,,,0
+184,,"Hickman St after Winnellie Rd",, -12.427119, 130.870603,,,0
+185,,"8 Sweet Street",, -12.429621, 130.872596,,,0
+186,,"Coonawarra Rd after Menmuir St",, -12.430282, 130.879201,,,0
+187,,"Catterthun St before Downes St",, -12.429717, 130.882289,,,0
+188,,"15 Albatross Street",, -12.428548, 130.884681,,,0
+189,,"Mataram St before Winnellie Rd",, -12.427381, 130.890394,,,0
+190,,"Winnellie Rd before Hook Rd",, -12.426552, 130.893637,,,0
+191,,"Stuart Hwy at Aviation Museum",, -12.426072, 130.897242,,,0
+192,,"Stuart Hwy opp Farrell Cres",, -12.426378, 130.900938,,,0
+193,,"Stuart Hwy at Berrimah Business Park",, -12.429718, 130.913647,,,0
+194,,"Stuart Hwy opp Hidden Valley Rd",, -12.431421, 130.918231,,,0
+195,,"Stuart Hwy before Vanderlin Drive",, -12.432879, 130.922213,,,0
+196,,"Vanderlin Dve after Stuart Hwy",, -12.430859, 130.923284,,,0
+197,,"680 Vanderlin Drive",, -12.421515, 130.923247,,,0
+198,,"Vanderlin Dve before Boulter Rd",, -12.415664, 130.923240,,,0
+199,,"Vanderlin Drive after Boulter Rd",, -12.413506, 130.923170,,,0
+200,,"McMillans Rd after Vanderlin Dve",, -12.408746, 130.920154,,,0
+201,,"McMillans Rd before Amy Johnson Ave",, -12.407256, 130.917492,,,0
+202,,"McMillans Rd opp Kalymnos Drive",, -12.404127, 130.912142,,,0
+203,,"McMillans Rd before Kemp St",, -12.400681, 130.906069,,,0
+204,,"McMillans Rd after Lakes Cres",, -12.396877, 130.898953,,,0
+205,,"Links Rd opp Northlakes Shops",, -12.396289, 130.896251,,,0
+206,,"McMillans Rd after Carnoustie Cct",, -12.395519, 130.890919,,,0
+207,,"McMillans Rd after Marrara Drive",, -12.395542, 130.882128,,,0
+208,,"Rothdale Rd before Seabright Cres",, -12.394447, 130.878165,,,0
+209,,"Rothdale Rd before Jingili Tce",, -12.389676, 130.877414,,,0
+210,,"Rothdale Rd before Knowles St",, -12.386792, 130.876729,,,0
+211,,"Rothdale Rd before Kilian Cres",, -12.384088, 130.876649,,,0
+213,,"51 Dripstone Road",, -12.375565, 130.876148,,,0
+214,,"82 Lakeside Drive",, -12.375664, 130.873623,,,0
+215,,"50 Lakeside Drive",, -12.378175, 130.870531,,,0
+216,,"14 Lakeside Drive",, -12.382298, 130.868806,,,0
+217,,"Ryland Rd before Waters St",, -12.385440, 130.860789,,,0
+218,,"85 Ryland Road",, -12.383189, 130.860061,,,0
+220,,"129 Ryland Road",, -12.378892, 130.855193,,,0
+221,,"Ryland Rd before Nightcliff Rd",, -12.379561, 130.851937,,,0
+222,,"Aralia St at Shops",, -12.379139, 130.848993,,,0
+223,,"38 Bougainvilia Street",, -12.381261, 130.847824,,,0
+224,,"Bougainvilia St after Bauhinia St",, -12.383308, 130.848366,,,0
+225,,"10 Bougainvilia Street",, -12.386447, 130.848365,,,0
+226,,"Progress Dr before Phoenix St",, -12.387851, 130.849525,,,0
+227,,"182 Dick Ward Drive",, -12.388872, 130.852342,,,0
+228,,"Dick Ward Dve after Runge St",, -12.392644, 130.852341,,,0
+229,,"132 Dick Ward Drive",, -12.395946, 130.852375,,,0
+230,,"Dick Ward Dve after Tang St",, -12.399946, 130.852389,,,0
+231,,"Dick Ward Drive opp Minmarama Park",, -12.412961, 130.850570,,,0
+232,,"Dick Ward Dve after Allen St",, -12.424534, 130.836233,,,0
+233,,"East Point Rd before Gregory St",, -12.431199, 130.837415,,,0
+234,,"East Point Rd before Leichhardt Cres",, -12.434799, 130.837979,,,0
+235,,"Gilruth Ave before Salonika St",, -12.438687, 130.837764,,,0
+236,,"Gilruth Ave at Gardens Oval",, -12.446133, 130.833471,,,0
+237,,"Gilruth Ave opp Casino",, -12.449727, 130.831682,,,0
+238,,"Mitchell St after Lambell Tce",, -12.453576, 130.830035,,,0
+239,,"Mitchell St before Marsina Ct",, -12.455105, 130.831638,,,0
+240,,"Mitchell St before Peary St",, -12.457796, 130.834405,,,0
+241,,"Gregory St before Knight St",, -12.432178, 130.838824,,,0
+242,,"31 Parap Rd",, -12.431302, 130.843255,,,0
+243,,"Ross Smith Ave at Parap Pool",, -12.427400, 130.841873,,,0
+244,,"Ross Smith Ave before Christie St",, -12.425460, 130.839182,,,0
+245,,"Progress Dve before Litchfield Ct",, -12.387975, 130.854528,,,0
+246,,"Old McMillans Rd after Sovereign Cct",, -12.395259, 130.853817,,,0
+247,,"68 Ryland Road",, -12.387236, 130.861680,,,0
+248,,"46 Ryland Road",, -12.389900, 130.862856,,,0
+249,,"22 Ryland Road",, -12.392553, 130.863690,,,0
+250,,"2 Ryland Road",, -12.394909, 130.863663,,,0
+251,,"McMillans Service Rd before Brooking St",, -12.395104, 130.866149,,,0
+252,,"209 McMillans Service Rd",, -12.395095, 130.868264,,,0
+253,,"Abala Rd, Hockey Centre",, -12.400463, 130.882754,,,0
+254,,"Abala Rd, Bonson Gates",, -12.400558, 130.885612,,,0
+255,,"Abala Rd, Ah Mat Gates",, -12.397813, 130.886350,,,0
+256,,"Abala Rd, Marrara Indoor Stadium",, -12.397778, 130.882095,,,0
+258,,"61 Lee Point Road",, -12.387682, 130.885766,,,0
+259,,"91 Lee Point Road",, -12.384424, 130.887721,,,0
+261,,"18 Pandanus St",, -12.380482, 130.850991,,,0
+262,,"9 Harney Street",, -12.411230, 130.852008,,,0
+263,,"opp 28 Harney Street",, -12.413352, 130.852615,,,0
+264,,"4 Nadpur Street",, -12.416520, 130.852279,,,0
+265,,"Haileybury Rendall School",, -12.442072, 130.923044,,,0
+266,,"Crocodylus Park",, -12.411558, 130.927876,,,0
+268,,"76 Rothdale Road",, -12.386095, 130.876850,,,0
+269,,"50 Rothdale Road",, -12.389342, 130.877586,,,0
+270,,"36 Rothdale Road",, -12.391136, 130.878012,,,0
+271,,"Rothdale Rd before Byrne Cct",, -12.394016, 130.878393,,,0
+272,,"McMillans Rd after Rothdale Rd",, -12.395277, 130.879703,,,0
+273,,"McMillans Rd after Lee Point Rd",, -12.395270, 130.884279,,,0
+274,,"McMillans Rd after Tolmer St",, -12.395282, 130.890192,,,0
+275,,"McMillans Rd opp Northlakes Shops",, -12.395304, 130.895562,,,0
+276,,"McMillans Rd after Matthews Rd",, -12.396522, 130.898986,,,0
+277,,"McMillans Rd before Mueller Rd",, -12.400313, 130.906007,,,0
+278,,"McMillans Rd before Kalymnos Dve",, -12.403299, 130.911240,,,0
+279,,"McMillans Rd before Moray St",, -12.406804, 130.917381,,,0
+280,,"Vanderlin Drive at Police Centre",, -12.412989, 130.923379,,,0
+281,,"621 Vanderlin Dve",, -12.415731, 130.923387,,,0
+282,,"Vanderlin Dve after Secrett Rd",, -12.421942, 130.923407,,,0
+283,,"Vanderlin Dve before Stuart Hwy",, -12.431292, 130.923545,,,0
+284,,"Stuart Hwy after Berrimah Rd",, -12.432856, 130.921380,,,0
+285,,"Stuart Hwy before Hidden Valley Rd",, -12.431815, 130.918520,,,0
+286,,"Stuart Hwy at Berrimah Defence Centre",, -12.429308, 130.911821,,,0
+287,,"Stuart Hwy after Farrell Cres",, -12.426542, 130.900363,,,0
+288,,"Stuart Hwy at Showgrounds",, -12.426341, 130.897625,,,0
+289,,"Winnellie Rd after Hook Rd",, -12.426706, 130.893357,,,0
+290,,"Albatross St after Mataram St",, -12.428678, 130.889877,,,0
+291,,"22 Albatross St",, -12.428740, 130.885004,,,0
+292,,"Catterthun St before Coonawarra Rd",, -12.429752, 130.882432,,,0
+293,,"Coonawarra Rd before Bombing Rd",, -12.430369, 130.880316,,,0
+294,,"60 Coonawarra Road",, -12.430417, 130.876449,,,0
+295,,"7 Sweet Street",, -12.429273, 130.872399,,,0
+296,,"Hickman St after Reichardt Rd",, -12.427718, 130.870505,,,0
+297,,"Stuart Hwy after Hickman St",, -12.425460, 130.868977,,,0
+298,,"Stuart Hwy at Winnellie Post Office",, -12.426639, 130.864521,,,0
+299,,"Stuart Hwy opp Shiers Street",, -12.428302, 130.859679,,,0
+301,,"Philip St before Hinkler Cres",, -12.423789, 130.837443,,,0
+302,,"Philip St before Banyan St",, -12.419769, 130.836618,,,0
+303,,"26 George Crescent",, -12.419739, 130.833907,,,0
+304,,"6 George Crescent",, -12.422489, 130.835258,,,0
+305,,"84 Ross Smith Ave",, -12.425454, 130.839605,,,0
+306,,"Ross Smith Ave after Brown St",, -12.427268, 130.842088,,,0
+307,,"Ross Smith Ave after Freer St",, -12.429637, 130.845402,,,0
+309,,"Gregory St before Parap Rd",, -12.432232, 130.843592,,,0
+310,,"Parap Rd before Stuart Hwy",, -12.435259, 130.843389,,,0
+311,,"19 Westralia Street",, -12.445052, 130.843242,,,0
+312,,"39 Westralia Street",, -12.444927, 130.845948,,,0
+313,,"Meigs Cres after Mary St",, -12.446261, 130.844766,,,0
+314,,"opp 3 Guy St",, -12.449129, 130.846734,,,0
+315,,"6 Gothenburg Cres",, -12.449000, 130.844780,,,0
+316,,"Margaret St at Que Noy Park",, -12.448976, 130.843064,,,0
+317,,"10 Duke Street",, -12.451010, 130.842562,,,0
+319,,"St Mary's School - Inbound",, -12.459395, 130.837967,,,0
+320,,"Hudson Fysh Ave before Douglas St",, -12.430170, 130.850780,,,0
+321,,"Bremmer St after Hudson Fysh Ave",, -12.429290, 130.851450,,,0
+322,,"3 Nadpur Street",, -12.416424, 130.852240,,,0
+323,,"30 Harney St",, -12.413434, 130.852450,,,0
+324,,"12 Harney Street",, -12.411281, 130.851908,,,0
+326,,"Dinah Beach Rd before Ruddick Ct",, -12.452739, 130.844235,,,0
+327,,"opp 426 Stuart Highway",, -12.425122, 130.876383,,,0
+328,,"435 Stuart Highway",, -12.425071, 130.879124,,,0
+329,,"opp 482 Stuart Highway",, -12.425101, 130.885048,,,0
+330,,"Stuart Hwy before Hook Rd",, -12.425740, 130.892993,,,0
+331,,"Stuart Hwy after Vanderlin Dve",, -12.433985, 130.925142,,,0
+332,,"Stuart Hwy after Lagoon Rd",, -12.437983, 130.935642,,,0
+333,,"Stuart Hwy after Thorak Rd",, -12.441880, 130.946253,,,0
+334,,"Stuart Hwy before Foundation Rd",, -12.447686, 130.956880,,,0
+335,,"863 Stuart Highway",, -12.451842, 130.962177,,,0
+336,,"Stuart Hwy after Deviney Rd",, -12.459039, 130.970924,,,0
+337,,"Roystonea Ave at Gateway Shopping Centre",, -12.471789, 130.982022,,,0
+338,,"Palmerston School Departure",, -12.478998, 130.986719,,,0
+340,,"Chung Wah Tce before Temple Tce",, -12.481551, 130.984230,,,0
+341,,"opp 12 Dwyer Circuit",, -12.484438, 130.979137,,,0
+342,,"51 Dwyer Circuit",, -12.481264, 130.980630,,,0
+343,,"79 Dwyer Circuit",, -12.480984, 130.977950,,,0
+344,,"Woodlake Blvd after University Ave",, -12.479330, 130.975740,,,0
+345,,"Woodlake Blvd opp Durack School",, -12.476533, 130.973491,,,0
+346,,"79 Woodlake Boulevard",, -12.473693, 130.973075,,,0
+347,,"Woodlake Blvd opp Kooralbyn Way",, -12.469866, 130.970207,,,0
+348,,"Woodlake Blvd opp Phoenix Cct",, -12.472290, 130.966047,,,0
+349,,"Woodlake Blvd before Majestic Drive",, -12.474498, 130.965892,,,0
+350,,"University Ave after Skeahan Drive",, -12.480447, 130.973154,,,0
+351,,"Charles Darwin University Palmerston",, -12.476017, 130.979438,,,0
+352,,"4 Maluka Drive",, -12.481328, 130.987379,,,0
+354,,"Lakeview Blvd opp Fitzroy Ct",, -12.488658, 130.993201,,,0
+355,,"Lakeview Blvd before Buscall Ave",, -12.489700, 130.997756,,,0
+356,,"Forrest Pde at Bakewell School",, -12.494003, 130.992756,,,0
+357,,"9 Landsborough Street",, -12.495417, 130.993927,,,0
+358,,"37 Landsborough Street",, -12.498063, 130.993797,,,0
+359,,"Aunger Cres after Ewing Ct",, -12.500799, 130.995725,,,0
+36,,"184 Leanyer Dve",, -12.382073, 130.902342,,,0
+360,,"Granites Dve before Rosebery Shops",, -12.503103, 130.993741,,,0
+361,,"68 Rosebery Drive",, -12.504251, 130.989931,,,0
+362,,"42 Rosebery Drive",, -12.504293, 130.988065,,,0
+363,,"Rosebery Dve after Flametree Cct",, -12.501503, 130.988530,,,0
+364,,"opp 32 Shearwater Drive",, -12.498744, 130.988498,,,0
+365,,"opp 68 Shearwater Drive",, -12.495398, 130.989930,,,0
+367,,"Vanderlin Dve after Waterpark",, -12.389099, 130.909808,,,0
+368,,"Calytrix Rd before Livistona Rd",, -12.393784, 130.913113,,,0
+369,,"13 Applegum Drive",, -12.395088, 130.914941,,,0
+370,,"Applegum Dve before Milkwood Cct",, -12.396036, 130.917206,,,0
+371,,"Applegum Dve after Kapok Ct",, -12.398750, 130.919760,,,0
+372,,"Bauer Cres after Wearing Cres",, -12.401480, 130.919710,,,0
+373,,"Bauer Cres before Manunda Tce",, -12.404010, 130.920150,,,0
+374,,"Moray St before McMillans Rd",, -12.407063, 130.919529,,,0
+375,,"Farrar Blvd Opp 119",, -12.482940, 131.002089,,,0
+376,,"84 Farrar Blvd",, -12.479870, 131.000847,,,0
+377,,"Farrar Blvd opp Nutwood Cres",, -12.479792, 130.996193,,,0
+378,,"Farrar Blvd before Kettle St",, -12.478345, 130.993783,,,0
+380,,"Georgina Cres before Toupein Rd",, -12.475650, 130.991215,,,0
+385,,"Roystonea Ave before Packard Ave",, -12.474103, 130.983485,,,0
+386,,"Stuart Hwy after Deviney Rd",, -12.458446, 130.969583,,,0
+387,,"876 Stuart Hwy after McKinnon Rd",, -12.453475, 130.963529,,,0
+388,,"Stuart Hwy opp Foundation Rd",, -12.448082, 130.956574,,,0
+389,,"Stuart Hwy after Tivendale Rd",, -12.441721, 130.944567,,,0
+390,,"Stuart Hwy after Panquee Blvd",, -12.437804, 130.933871,,,0
+391,,"Stuart Hwy before Berrimah Rd",, -12.435974, 130.929118,,,0
+392,,"21 Moray St",, -12.405692, 130.920248,,,0
+393,,"Bauer Cres after Manunda Tce",, -12.403578, 130.920214,,,0
+394,,"Bauer Cres after McPherson St",, -12.401338, 130.919546,,,0
+395,,"58 Applegum Drive",, -12.398525, 130.919476,,,0
+396,,"40 Applegum Drive",, -12.396871, 130.917922,,,0
+397,,"Applegum Dve before Livistona Rd",, -12.395333, 130.913682,,,0
+398,,"Calytrix Rd before Vanderlin Dve",, -12.392820, 130.913599,,,0
+399,,"Vanderlin Drive opp Waterpark",, -12.388708, 130.908815,,,0
+401,,"7 Erldunda Street",, -12.364952, 130.876008,,,0
+402,,"160 Tiwi Gardens",, -12.361860, 130.877237,,,0
+403,,"9 Manbulloo Street",, -12.360461, 130.880217,,,0
+404,,"358 Trower Rd, Tiwi",, -12.366615, 130.878706,,,0
+406,,"opp 26 Livistona Road",, -12.397045, 130.913576,,,0
+407,,"39 Koolinda Crescent",, -12.398830, 130.912500,,,0
+408,,"Koolinda Cres before Dongara Ct",, -12.398523, 130.910504,,,0
+409,,"Ringwood St before Matthews Rd",, -12.394735, 130.898302,,,0
+410,,"McMillians Rd after Henry Wrigley Dve",, -12.395560, 130.877273,,,0
+411,,"Odegaard Dve before Darla Pl",, -12.504218, 130.992187,,,0
+413,,"179 Lee Point Road",, -12.373683, 130.891112,,,0
+414,,"Leanyer Dve before Killuppa Cres",, -12.380824, 130.903223,,,0
+415,,"138 Leanyer Drive",, -12.377727, 130.901476,,,0
+416,,"Leanyer Primary School",, -12.374746, 130.900717,,,0
+417,,"Good Shepherd College, Leanyer Drive",, -12.373237, 130.900046,,,0
+418,,"54 VRD Drive",, -12.371182, 130.897108,,,0
+419,,"8 VRD Drive",, -12.368929, 130.892856,,,0
+421,,"Lee Point Rd before Bathurst St",, -12.373407, 130.891401,,,0
+422,,"Lee Point Rd after Jabiru St",, -12.381482, 130.889741,,,0
+423,,"opp 67 Lee Point Rd",, -12.387219, 130.886326,,,0
+424,,"opp 39 Lee Point Rd",, -12.390538, 130.884377,,,0
+426,,"Angelo St at Casuarina Pool",, -12.373384, 130.884318,,,0
+427,,"Gregory St before MacKillop St",, -12.432262, 130.842539,,,0
+428,,"Gregory St before McKinlay St",, -12.432267, 130.839134,,,0
+430,,"Victoria Dve before Priest Cct",, -12.490395, 130.981043,,,0
+431,,"29 Victoria Drive",, -12.491181, 130.979310,,,0
+432,,"55 Victoria Drive",, -12.493172, 130.978203,,,0
+433,,"Emery Ave opp Sacred Heart Primary School",, -12.494674, 130.978798,,,0
+434,,"65 Emery Avenue",, -12.495455, 130.981492,,,0
+435,,"13 Sibbald Crescent",, -12.497313, 130.982075,,,0
+436,,"35 Sibbald Crescent",, -12.499839, 130.981162,,,0
+437,,"11 Woodroffe Avenue",, -12.502514, 130.981520,,,0
+438,,"Woodroffe Ave at Woodroffe Primary School",, -12.506590, 130.981388,,,0
+439,,"65 Woodroffe Avenue",, -12.508075, 130.979895,,,0
+440,,"Sibbald Cres after Betelgeuse Ct",, -12.501989, 130.983780,,,0
+444,,"Temple Tce after Tilston Ave",, -12.495000, 130.974903,,,0
+445,,"17 Emery Avenue",, -12.494093, 130.976920,,,0
+446,,"Chung Wah Tce after Emery Ave",, -12.496248, 130.986438,,,0
+447,,"Essington Ave at Essington Park",, -12.492174, 130.983680,,,0
+448,,"Essington Ave after Victoria Dve",, -12.489436, 130.981849,,,0
+450,,"Raffles Rd before Dunbar St",, -12.487665, 130.984926,,,0
+451,,"Raffles Rd before Chung Wah Tce",, -12.486303, 130.987447,,,0
+452,,"Chung Wah Tce before Oasis Shops",, -12.484375, 130.987086,,,0
+453,,"Essington Ave after Dunbar St",, -12.487019, 130.982165,,,0
+454,,"Essington Ave after Dillon Cct",, -12.493826, 130.985752,,,0
+456,,"Stuart Hwy after Hook Rd",, -12.425923, 130.892455,,,0
+457,,"Stuart Hwy after Bombing Rd",, -12.425299, 130.879896,,,0
+458,,"426 Stuart Highway",, -12.425349, 130.876389,,,0
+459,,"478 Stuart Highway",, -12.425340, 130.884684,,,0
+460,,"15 Canaris Street",, -12.370583, 130.889565,,,0
+461,,"Bonson Tce at Moulden Primary School",, -12.505998, 130.970527,,,0
+462,,"Driver Ave at Driver School",, -12.484606, 130.975416,,,0
+463,,"Driver Ave at Driver Shops",, -12.485786, 130.973118,,,0
+464,,"Driver Ave after Canonbury Cct",, -12.488648, 130.972761,,,0
+465,,"Driver Ave after Widdup Cres",, -12.490307, 130.970608,,,0
+466,,"Elrundie Ave before Tilston Ave",, -12.492904, 130.969109,,,0
+467,,"Tilston Ave after Chin Gong Cct",, -12.495366, 130.970988,,,0
+468,,"35 Bonson Terrace",, -12.499736, 130.971703,,,0
+469,,"65 Bonson Terrace",, -12.502639, 130.972241,,,0
+470,,"Bonson Tce after Tamarind Rd",, -12.504422, 130.972003,,,0
+471,,"Elrundie Ave before Chung Wah Tce",, -12.514940, 130.973490,,,0
+472,,"Moulden Tce before Cuthbertson Cres",, -12.513798, 130.976347,,,0
+473,,"Kafcaloudes Cres before Bombax St",, -12.508205, 130.975717,,,0
+474,,"Temple Tce after Tamarind Rd",, -12.503414, 130.975203,,,0
+475,,"21 Waterhouse Crescent",, -12.490957, 130.972334,,,0
+476,,"100 Driver Avenue",, -12.488711, 130.972668,,,0
+477,,"72 Driver Ave opp Driver Shops",, -12.485749, 130.972888,,,0
+478,,"36 Driver Avenue",, -12.484472, 130.975736,,,0
+479,,"Waler Rd at Palmerston Christian School",, -12.491370, 130.964941,,,0
+480,,"Kafcaloudes Cres at Lindsay Park",, -12.510812, 130.975410,,,0
+481,,"Woodlake Blvd before Pritchardia Cct",, -12.474382, 130.965630,,,0
+482,,"Woodlake Blvd before Phoenix Cct",, -12.472229, 130.966064,,,0
+483,,"Woodlake Blvd before Kooralbyn Way",, -12.469515, 130.969969,,,0
+484,,"Woodlake Blvd at Durack School",, -12.476550, 130.973674,,,0
+485,,"16 Woodlake Boulevard",, -12.478429, 130.975466,,,0
+487,,"Darwin High School",, -12.440120, 130.833140,,,0
+488,,"4 Wulagi Crescent",, -12.386190, 130.891860,,,0
+489,,"Wulagi Crescent",, -12.385010, 130.894540,,,0
+490,,"61 Wulagi Crescent",, -12.384580, 130.899110,,,0
+491,,"80 Malak Crescent",, -12.388800, 130.901830,,,0
+492,,"9 Dalwood Crescent",, -12.388670, 130.903480,,,0
+493,,"35 Dalwood Crescent",, -12.389130, 130.906660,,,0
+494,,"63 Dalwood Crescent",, -12.391670, 130.909060,,,0
+495,,"Mueller Rd at O'Loughlin College",, -12.393350, 130.909810,,,0
+498,,"Palmerston School Terminus",, -12.478658, 130.986660,,,0
+499,,"39660.4604166667",, -12.465600, 131.070540,,,0
+500,,"Good Shepherd Lutheran School",, -12.494141, 131.024688,,,0
+502,,"Stuart Hwy after Bowhunters Rd",, -12.507258, 131.019636,,,0
+503,,"Stuart Hwy opp Virginia Rd",, -12.515310, 131.029567,,,0
+505,,"420 Stuart Hwy, Coolalinga",, -12.521555, 131.039268,,,0
+506,,"Stuart Hwy after Morgan Rd",, -12.506383, 131.018707,,,0
+507,,"Virginia Rd after Stuart Hwy",, -12.516023, 131.029269,,,0
+508,,"London Rd after Lowther Rd",, -12.554658, 131.038323,,,0
+509,,"305 Bees Creek Road",, -12.562278, 131.059092,,,0
+510,,"Gulnare Rd after Stuart Hwy",, -12.584158, 131.071342,,,0
+511,,"Bees Creek Rd after Gulnare Rd",, -12.583203, 131.058914,,,0
+512,,"Lowther Rd after Goodenia Dve",, -12.554897, 131.046987,,,0
+513,,"Virginia Rd after Jervois Rd",, -12.541792, 131.029190,,,0
+514,,"Virginia Rd after Irwin Rd",, -12.521873, 131.029172,,,0
+517,,"Wanguri Tce at Shops",, -12.369110, 130.889320,,,0
+518,,"97 WANGURI TCE, WANGURI",, -12.366876, 130.889723,,,0
+519,,"27 TAMBLING TCE, WANGURI",, -12.366103, 130.888291,,,0
+520,,"Willeroo St",, -12.365034, 130.884249,,,0
+521,,"Tiwi Gardens Road",, -12.363301, 130.883299,,,0
+522,,"Tiwi Gardens Road",, -12.361676, 130.881904,,,0
+523,,"Hillier Rd before Finlay Rd",, -12.507974, 131.059188,,,0
+525,,"Anglesey Rd after Carabao Rd",, -12.529663, 131.107262,,,0
+526,,"Pioneer Dve after Produce Rd",, -12.554984, 131.118212,,,0
+531,,"Moil Crescent opp Shops",, -12.391248, 130.882048,,,0
+533,,"Bayview Blvd at Half Moon Park",, -12.440833, 130.856429,,,0
+534,,"Stoddart Dve at Seascapes Park",, -12.435770, 130.857464,,,0
+537,,"13 Antonino Drive",, -12.507400, 130.987378,,,0
+538,,"14 Catchlove Street",, -12.505825, 130.985628,,,0
+54,,"Jingili Tce before Shops",, -12.389407, 130.874959,,,0
+542,,"95 Virginia Road",, -12.522456, 131.029330,,,0
+543,,"141 Virginia Road",, -12.529029, 131.029303,,,0
+544,,"Virginia Rd after Bilby Rd",, -12.533878, 131.029439,,,0
+545,,"295 Virginia Road",, -12.541723, 131.029338,,,0
+546,,"Jacomb Pl before Francesca Cct",, -12.550427, 131.031738,,,0
+547,,"65 Francesca Circuit",, -12.546609, 131.035171,,,0
+548,,"London Rd before Lowther Rd",, -12.554692, 131.038422,,,0
+549,,"Lowther Rd before Carambola Rd",, -12.554801, 131.047092,,,0
+553,,"Bees Creek Rd before Gulnare Rd",, -12.583487, 131.059086,,,0
+554,,"Gulnare Rd before Stuart Hwy",, -12.583968, 131.071097,,,0
+556,,"Elizabeth Valley Rd after Gullick Rd",, -12.642454, 131.099786,,,0
+557,,"Elizabeth Valley Rd after Weaver Rd",, -12.642813, 131.103345,,,0
+558,,"Redcliffe Rd opp Whitaker Rd",, -12.629077, 131.118690,,,0
+559,,"Redcliffe Rd opp Varro Rd",, -12.616408, 131.118454,,,0
+56,,"Moil Cres at Moil Shops",, -12.391135, 130.881738,,,0
+560,,"Redcliffe Rd before Ballinger St",, -12.603799, 131.118458,,,0
+561,,"350 Freds Pass Road",, -12.596692, 131.116675,,,0
+562,,"Freds Pass Rd opp Linane Rd",, -12.587608, 131.111049,,,0
+563,,"Kennedy Rd before Bruce Ct",, -12.557520, 131.096195,,,0
+564,,"Anglesey Rd after Pioneer Dve",, -12.554081, 131.111074,,,0
+565,,"Anglesey Rd before Strawberry Rd",, -12.544011, 131.111044,,,0
+566,,"265 Anglesey Road",, -12.531680, 131.107780,,,0
+568,,"Nakara School (Nakara Tce)",, -12.368956, 130.877923,,,0
+572,,"137 Forrest Parade",, -12.506561, 130.991129,,,0
+573,,"Owston Ave after Pye St",, -12.509899, 130.985065,,,0
+574,,"Owston Ave after McAulay St",, -12.509894, 130.985330,,,0
+575,,"Forrest Pde opp McAulay St",, -12.511694, 130.988591,,,0
+576,,"opp 137 Forrest Parade",, -12.506624, 130.990980,,,0
+577,,"495 Bees Creek Road",, -12.578797, 131.059114,,,0
+583,,"Whitewood Rd opp Howard Springs School",, -12.496293, 131.044655,,,0
+585,,"Girraween Rd before Rogers Rd",, -12.525452, 131.092321,,,0
+586,,"195 Whitewood Road",, -12.496219, 131.034847,,,0
+587,,"Howard Springs Primary School",, -12.496175, 131.045971,,,0
+588,,"Humpty Doo Park & Ride",, -12.576781, 131.100392,,,0
+589,,"Cox Peninsula Interchange",, -12.673611, 131.078042,,,0
+59,,"Yanyula Dve at Anula Shops",, -12.392363, 130.890910,,,0
+593,,"Howard Springs Rd after Whitewood Rd",, -12.493184, 131.018607,,,0
+594,,"Girraween Rd after Shewring Rd",, -12.525683, 131.084483,,,0
+595,,"Girraween Rd before McMinns Rd",, -12.525670, 131.079909,,,0
+596,,"Stoddart Dve before Tiger Brennan Dve",, -12.439446, 130.851816,,,0
+597,,"Frances Bay Dve before Tipperary Ct",, -12.448796, 130.849425,,,0
+598,,"Frances Bay Dve opp Shops",, -12.448630, 130.849350,,,0
+601,,"Taminmin College",, -12.579867, 131.101300,,,0
+602,,"Humpty Doo Park & Ride",, -12.576865, 131.100512,,,0
+605,,"opp 18 Nemarluk Dve",, -12.421152, 130.853442,,,0
+607,,"Girraween Rd opp Azure Ct",, -12.525661, 131.071369,,,0
+608,,"Hillier Rd after Girraween Rd",, -12.524737, 131.058843,,,0
+609,,"32 Wulagi Crescent",, -12.385140, 130.894607,,,0
+610,,"Wulagi Crescent - Route 12a - Weekends Only",, -12.386370, 130.891890,,,0
+611,,"Yanyula Drive - Anula",, -12.390560, 130.894360,,,0
+612,,"Yanyula Drive",, -12.392487, 130.890813,,,0
+613,,"Yanyula Drive",, -12.390284, 130.887807,,,0
+614,,"Yanyula Drive",, -12.389467, 130.886377,,,0
+615,,"Parrar Drive",, -12.383940, 130.882430,,,0
+616,,"Sanderson High School",, -12.388550, 130.898090,,,0
+617,,"Nightcliff High School",, -12.378087, 130.851854,,,0
+621,,"Rapid Creek Road - Milner",, -12.387612, 130.864524,,,0
+623,,"Marrara Christian College",, -12.408710, 130.916830,,,0
+624,,"Scales Street",, -12.390319, 130.878413,,,0
+630,,"100 Hillier Road",, -12.516565, 131.058891,,,0
+631,,"Hillier Rd after Stanley Rd",, -12.507981, 131.058971,,,0
+632,,"opp 115 Stow Road",, -12.491651, 131.029137,,,0
+635,,"Matthews Road",, -12.392980, 130.897700,,,0
+637,,"Stow Rd before Howard Springs Rd",, -12.482832, 131.029098,,,0
+641,,"Ryland Road - Rapid Creek",, -12.394720, 130.863580,,,0
+642,,"Ryland Road - Rapid Creek",, -12.392043, 130.863539,,,0
+643,,"opp 29 Danamila Terrace",, -12.363105, 130.889505,,,0
+644,,"Lyons Community Centre",, -12.359648, 130.888233,,,0
+647,,"Castlereagh Drive",, -12.376020, 130.894260,,,0
+649,,"Wanguri Terrace",, -12.375050, 130.888910,,,0
+650,,"Castlereagh Drive",, -12.375960, 130.894330,,,0
+651,,"Brolga Street - Wulagi",, -12.381770, 130.895460,,,0
+655,,"6 Daldawa Terrace",, -12.357019, 130.889225,,,0
+657,,"Odegaard Dve at Joan Fejo Park",, -12.507700, 130.994919,,,0
+662,,"Belyuen Rd after Odegaard Dr",, -12.509458, 130.992849,,,0
+688,,"Rosebery Secondary School",, -12.509326, 130.991943,,,0
+69,,"Darwin Harry Chan Ave",, -12.464777, 130.844350,,,0
+693,,"36 Haydon Street",, -12.507891, 130.988983,,,0
+70,,"Woolworths Cavenagh St",, -12.460537, 130.840989,,,0
+71,,"St Mary's School",, -12.458620, 130.838984,,,0
+757,,"Bagot Rd after Totem Rd",, -12.401322, 130.855985,,,0
+761,,"Palmerston Indigenous Village",, -12.490039, 131.011330,,,0
+763,,"Virginia Rd at Virginia Store",, -12.517907, 131.029154,,,0
+764,,"Bees Creek Primary School",, -12.541800, 131.053177,,,0
+765,,"Sattler Christian College",, -12.541807, 131.053192,,,0
+766,,"90 London Road",, -12.551309, 131.038273,,,0
+767,,"70 Francesca Circuit",, -12.546737, 131.035234,,,0
+768,,"Jacomb Pl before Virginia Rd",, -12.550645, 131.031087,,,0
+769,,"Noonamah Tavern",, -12.633516, 131.074056,,,0
+770,,"Elizabeth Valley Rd before Stuart Hwy",, -12.642498, 131.078931,,,0
+771,,"opp 360 Elizabeth Valley Road",, -12.642376, 131.109644,,,0
+772,,"Redcliffe Rd after Noel Rd",, -12.637301, 131.118531,,,0
+773,,"Redcliffe Rd after Harmer St",, -12.608089, 131.118455,,,0
+774,,"30 Freds Pass Road",, -12.593228, 131.113418,,,0
+775,,"67 Forrest Pde",, -12.499500, 130.992835,,,0
+776,,"Stuart Hwy after Virginia Rd",, -12.515449, 131.028678,,,0
+777,,"Eden Street",, -12.442880, 130.843090,,,0
+778,,"Stuart Hwy after Millar Rd",, -12.573697, 131.073697,,,0
+779,,"Stuart Hwy before Forest Dve",, -12.584978, 131.073665,,,0
+780,,"Stuart Hwy after Gonnerman Rd",, -12.596321, 131.073780,,,0
+781,,"Stuart Hwy after Jenkins Rd",, -12.612486, 131.073115,,,0
+782,,"Stuart Hwy opp Gonnerman Rd",, -12.594923, 131.073208,,,0
+783,,"1290 Stuart Highway",, -12.588329, 131.073243,,,0
+784,,"Stuart Hwy after Gulnare Rd",, -12.583239, 131.073239,,,0
+785,,"Stuart Hwy opp Millar Rd",, -12.572018, 131.073254,,,0
+787,,"Stuart Hwy opp Sayer Rd",, -12.555608, 131.069193,,,0
+788,,"Arnhem Hwy after Hayball Rd",, -12.569617, 131.090475,,,0
+790,,"Essington School, Chrisp St",, -12.383257, 130.856548,,,0
+798,,"Stuart Hwy after Sayer Rd",, -12.555815, 131.069826,,,0
+805,,"46 Marina Boulevard",, -12.449864, 130.823605,,,0
+806,,"Cullen Bay Ferry Terminal",, -12.451565, 130.820822,,,0
+809,,"opp 20 Marina Boulevard",, -12.449880, 130.825995,,,0
+811,,"56 Bayview Boulevard",, -12.441599, 130.858290,,,0
+812,,"Frances Bay Dve at Fishermans Wharf",, -12.459188, 130.847473,,,0
+813,,"Stoddart Dve after Michie Ct",, -12.439323, 130.852852,,,0
+814,,"Kalymnos Drive opp Karama Shops",, -12.401858, 130.915921,,,0
+815,,"Coolalinga Park & Ride",, -12.525350, 131.046260,,,0
+816,,"Henry Wrigley Dr, Airport Precinct",, -12.404029, 130.878779,,,0
+817,,"McMinns St before Stokes Hill Rd",, -12.465416, 130.847746,,,0
+818,,"Farrar Blvd After Tarakan Ct",, -12.498681, 131.006002,,,0
+819,,"238 Farrar Blvd",, -12.494097, 131.005920,,,0
+820,,"Boulter Rd at Steiner School",, -12.414890, 130.921009,,,0
+821,,"47 Boulter Road",, -12.414479, 130.916937,,,0
+822,,"Girraween Rd after Jarrold Pl",, -12.525488, 131.069626,,,0
+823,,"140 Howard Springs Road",, -12.487270, 131.024017,,,0
+824,,"opp 140 Howard Springs Road",, -12.487000, 131.023852,,,0
+828,,"Museum & Art Gallery of NT",, -12.437082, 130.833451,,,0
+829,,"Chung Wah Tce before Buscall Ave",, -12.493351, 130.987522,,,0
+830,,"229 Forrest Parade",, -12.513589, 130.986238,,,0
+831,,"Forrest Pde after Eucharia St",, -12.514947, 130.980752,,,0
+832,,"133 Flynn Cct",, -12.512650, 130.980656,,,0
+833,,"Flynn Cct before Pye St",, -12.512386, 130.983522,,,0
+834,,"Zuccoli Pde before Zuccoli Shops",, -12.504809, 131.008196,,,0
+835,,"Zuccoli Pde after Brook Cct",, -12.503427, 131.006692,,,0
+841,,"Dawarra Cres at Bilingga Park",, -12.352616, 130.886813,,,0
+842,,"Limmen St before Malay Rd",, -12.382175, 130.884943,,,0
+843,,"Lee Point Rd before Fitzmaurice Dve",, -12.364896, 130.892505,,,0
+844,,"Dawarra Crescent",, -12.356099, 130.888456,,,0
+847,,"Farrar Blvd after Brisbane Cres",, -12.488919, 131.004916,,,0
+850,,"95 Acacia Road",, -12.568536, 131.131757,,,0
+86,,"Progress Drive at John Stokes Square",, -12.387984, 130.850547,,,0
+900,,"Casuarina Bradshaw Terrace Terminus",, -12.372981, 130.880299,,,0
+903,,"Palmerston Terminus",, -12.478617, 130.986616,,,0
+905,,"Amy Johnson Ave at Marrara Christian School",, -12.407200, 130.916060,,,0
+912,,"Noonamah Tavern",, -12.633469, 131.074113,,,0
+925,,"Palmerston Interchange",, -12.478897, 130.986860,,,0
+928,,"Larrakeyah Primary School, Marella St",, -12.456904, 130.830291,,,0
+933,,"Casuarina Bradshaw Terrace",, -12.373320, 130.880355,,,0
+937,,"Coolalinga Central after Fairweather Cres",, -12.523587, 131.043330,,,0
+943,,"140 Whitewood Road",, -12.496356, 131.030413,,,0
+948,,"Kitchener Dve before Anchorage Ct",, -12.467610, 130.845193,,,0
+951,,"Kitchener Drive under Skybridge",, -12.466811, 130.845768,,,0
+968,,"Florey Ave, Royal Darwin Hospital",, -12.356394, 130.883128,,,0
+970,,"Lambrick Ave before Chung Wah Tce",, -12.500441, 130.986388,,,0
+971,,"Tilston Ave, Driver Secondary School",, -12.496056, 130.973570,,,0
+972,,"opp 46 Packard Ave",, -12.472803, 130.977461,,,0
+979,,"Asche St after Farquhar St",, -12.360653, 130.895400,,,0
+980,,"Fuhrmann St opp Asche St",, -12.354525, 130.891517,,,0
+984,,"Darwin Hospital Precinct, Bambatj Rd",, -12.353270, 130.884070,,,0
+990,,"Hillier Rd before Cartonena St",, -12.514880, 131.059062,,,0
+991,,"Hillier Rd before Girraween Rd",, -12.524151, 131.059063,,,0
+994,,"Dripstone Secondary College",, -12.367344, 130.884613,,,0
+995,,"Anglesey Rd opp Woodcote Cres",, -12.549307, 131.111026,,,0
+997,,"Palmerston Regional Hospital",, -12.475172, 131.002407,,,0
+998,,"Yanyula Dve at Anula Primary School",, -12.390086, 130.893241,,,0
+CDCS015,,"Gray Primary School",, -12.490136, 130.981044,,,0
+CDCS039,,"MacKillop Catholic College",, -12.497678, 131.009247,,,0
+CDCS049,,"Darwin Middle School",, -12.437816, 130.834889,,,0
+CDCS054,,"Catalina Rd Moulden",, -12.502262, 130.967038,,,0
+CDCS059,,"Larrakeyah Primary School",, -12.457017, 130.830174,,,0
+CDCS084,,"Waler Rd/Marlow Lagoon",, -12.491518, 130.965445,,,0
+CDCS085,,"O’Loughlin College",, -12.394893, 130.909943,,,0
+CDCS088,,"Nakara Primary School",, -12.369030, 130.877904,,,0
+TBA-19,,"opp 290",, -12.428543, 130.889885,,,0
+TBA-63,,"opp 364",, -12.498728, 130.988598,,,0
