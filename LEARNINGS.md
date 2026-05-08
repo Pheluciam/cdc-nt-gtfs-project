@@ -41,6 +41,17 @@ is wired up and producing usable analytics.
   materialises the data — slower to build, faster to query. For BI workloads,
   warehouse-layer fact and dim tables generally make sense as tables. Still
   learning when each makes sense.
+- **`dbt run` parses, doesn't execute (for views).** A clean `dbt run`
+  only proves the SQL *parses*. Bugs that only surface at query time —
+  type casts, range errors, missing columns in upstream views — won't show
+  up until something actually reads from the view (Power BI, a downstream
+  model, a manual `SELECT`). Hit this with a `::TIME` cast on a GTFS
+  `24:26:00` value: dbt was happy, Power BI was not. Materialising as a
+  table forces execution at build time, which would have caught it earlier.
+- **`dbt run --select model+` rebuilds a model AND everything downstream.**
+  The `+` suffix tells dbt to walk the dependency graph forward. Useful
+  when you fix a model and need every dependent model regenerated in one
+  command. (`+model` rebuilds upstream dependencies; `+model+` does both.)
 
 ### Power BI
 
@@ -70,6 +81,15 @@ is wired up and producing usable analytics.
   sometimes defaults to a Matrix, which has different field wells (Rows /
   Columns / Values) and different summarisation behaviour. Switch to Table
   visual for plain tabular output.
+- **Transaction-cascade error display.** When Power BI's "Get Data" loads
+  multiple tables in one batch, all tables go through PostgreSQL in a
+  single transaction. If *one* table's query errors out, the whole
+  transaction rolls back and Power BI shows "failed" against *every*
+  table in that batch — even tables that would have loaded fine on their
+  own. The error message includes the phrase *"another operation in the
+  transaction failed"* — that's the giveaway. Don't waste time
+  troubleshooting tables that aren't the actual problem; find the one
+  real failure (the underlying error usually points at it) and fix that.
 
 ### PostgreSQL
 
@@ -82,6 +102,15 @@ is wired up and producing usable analytics.
   running the model. `SELECT column_name FROM information_schema.columns WHERE
 table_schema = 'X' AND table_name = 'Y'` answers "is this column actually
   there?" — useful when something downstream is breaking.
+- **`INTERVAL` vs `TIME` for GTFS extended hours.** PostgreSQL's `TIME`
+  type only accepts hours 0-23, so any cast like `'24:26:00'::TIME` errors
+  out. `INTERVAL` accepts the same string and treats it as 24 hours
+  26 minutes — exactly what GTFS intends for late-night trips that span
+  midnight. When doing time arithmetic on data that might contain GTFS
+  extended hours (duration calculations, time-band classification),
+  default to `::INTERVAL` rather than `::TIME`. INTERVAL also supports
+  arithmetic (`a - b` returns an interval) and `EXTRACT(EPOCH FROM ...)`
+  works the same way for both. Same syntax, more permissive type.
 
 ### Star schema fundamentals (reinforced)
 
@@ -173,6 +202,122 @@ manually created the right ones.
 **Manage Relationships** review. Autodetect is a starting hint, not a
 finished decision.
 
+### GTFS extended times (24:00+) broke `trip_timebands` at query time
+
+**Symptom:** Power BI's "Get Data" against `trip_timebands` failed with:
+
+> `PostgreSQL: 22008: date/time field value out of range: "24:26:00"`
+
+`dbt run` had completed successfully with no errors. The break only
+appeared when Power BI tried to query the view.
+
+**Diagnosis:** Two stacked issues.
+
+First, the GTFS spec allows departure times like `24:26:00` or `25:30:00`
+to mean *"next-day clock time, but still part of today's service day."*
+This is intentional — keeps a late-night trip that crosses midnight inside
+the same service-day grouping rather than splitting it across two calendar
+dates. PostgreSQL's `TIME` type only accepts 0–23 hours, so any cast like
+`first_departure::TIME` throws a range error on these values.
+
+Second, my `trip_timebands.sql` was materialised as a view (dbt default).
+`dbt run` only validates that the SQL parses — it doesn't execute it.
+The `::TIME` cast only failed when Power BI actually queried the view.
+
+**Fix:** Normalise GTFS extended hours back to 0–23 range before casting:
+
+```sql
+CASE
+    WHEN SUBSTRING(first_departure FROM 1 FOR 2)::INT >= 24 THEN
+        LPAD((SUBSTRING(first_departure FROM 1 FOR 2)::INT - 24)::TEXT, 2, '0')
+        || SUBSTRING(first_departure FROM 3)
+    ELSE first_departure
+END AS clock_departure
+```
+
+Then `clock_departure::TIME` works for every row, and the time-band
+classification still makes sense (a `24:26` trip is treated as a `00:26`
+trip for clock-time bucketing — which is the right answer).
+
+**What this taught me:**
+
+- A green `dbt run` log doesn't equal "tested." For view-materialised
+  models, only parsing has been validated. Bugs surface when downstream
+  consumers query the view. Worth knowing for debugging — when something
+  downstream breaks, don't trust the dbt log alone, run a `SELECT *` from
+  the view manually before assuming dbt is fine.
+- Real-world data spec quirks are exactly the kind of thing DE work runs
+  into. The GTFS extended-hours convention is documented in the spec, but
+  it's the kind of detail you only notice when it breaks something. Worth
+  reading source data specs carefully — would have saved time here.
+
+### Misleading column name hid a 1000× unit error in trip_kpis
+
+**Symptom:** `avg_speed_kmh` from `trip_kpis` returned values like 0.02,
+0.01, 0.009 km/h — three orders of magnitude too low for buses, which
+should sit in the 15–40 km/h range.
+
+**Diagnosis:** The model had a CTE column named `total_distance_m` (with
+the `_m` suffix suggesting metres). The downstream calculation divided
+by 1000.0 to "convert metres to km." But the actual data in
+`shape_dist_traveled` from this GTFS feed was already in **kilometres**.
+So the calculation was going from km → "km / 1000" → labelling the
+result as km. Speed was therefore 1000× too small.
+
+**Fix:**
+
+1. Renamed the CTE column from `total_distance_m` to `total_distance_km`
+   to reflect the actual unit
+2. Removed every `/1000.0` division — the data is already in the unit we
+   want
+3. Verified after rebuild: bus speeds returned to the realistic 15–40
+   km/h range
+
+**What this taught me:**
+
+- **Column names are documentation, not labels.** A misleadingly-named
+  column quietly propagates errors through every downstream calculation.
+  No one in the chain questioned what `total_distance_m` actually
+  contained because the name said "metres."
+- **GTFS `shape_dist_traveled` units are agency-specific.** The spec
+  doesn't enforce metres or km — different feeds use different units,
+  some leave it null. When ingesting GTFS, the unit is *always* worth
+  verifying against the feed's `feed_info.txt` or by sanity-checking a
+  known route's real-world length against the column's value.
+- When derived metrics look wrong, **trace the units** before assuming
+  the formula is wrong. The formula here was correct; the input
+  assumptions were wrong.
+
+### Power BI transaction-cascade displayed every loaded table as failed
+
+**Symptom:** Tried to "Get Data" five new summary tables. Got an error
+referencing PostgreSQL `22008: date/time field value out of range`.
+Then opened Manage Tables and saw *all 15 tables* (10 existing + 5 new)
+showing as failed — including tables I hadn't touched.
+
+**Diagnosis:** Power BI batches table loads into a single PostgreSQL
+transaction. When one query failed (a `::TIME` cast on a GTFS extended
+hour value, in `trip_kpis`), the transaction rolled back, and every
+table in the batch was marked failed by Power BI — not just the one
+that actually broke.
+
+The original error message included the phrase *"The current operation
+was cancelled because another operation in the transaction failed"* —
+that's the cascade signal.
+
+**Fix:** Found the real failing model (`trip_kpis` doing `::TIME` casts
+that hit GTFS extended hours), patched it (`::TIME` → `::INTERVAL`),
+rebuilt downstream models, and re-ran Power BI Get Data. All 15 tables
+loaded cleanly.
+
+**What this taught me:**
+
+- Don't waste time investigating every "failed" table when Power BI
+  reports a batch failure. Look for the *root cause* error in the
+  transaction; the rest are symptoms.
+- The "another operation failed" phrasing is the diagnostic flag. When
+  you see it, the failure is upstream of what you think you're looking at.
+
 ---
 
 ## Design decisions
@@ -200,6 +345,32 @@ feeds.
 Default Many-to-One with single-direction filter for everything. Avoids
 weird filter propagation issues that bi-directional relationships can cause
 in DAX measures. Easy to revisit per-relationship if a specific need arises.
+
+### Display-name logic: dbt vs Power BI relationship
+
+Hit this twice on this project. Both times needed clean human-readable
+labels (e.g., "Darwin" / "Alice Springs") instead of internal feed_id
+values. Two viable options:
+
+- **Option A — add a display column in dbt** (e.g., `agency_display_name`
+  via a `CASE WHEN feed_id = 'darwin' THEN 'Darwin' ...` in the warehouse
+  model). Display logic lives in the warehouse and is visible to anyone
+  querying the database.
+- **Option B — add a Power BI relationship on a shared key** (e.g.,
+  `dim_stops → dim_agency` on `feed_id`) and then use `dim_agency`'s
+  existing display name via the relationship. Display logic lives in the
+  `.pbix` file.
+
+Picked **A** for `dim_agency` (cleaner, more DE-idiomatic). Picked **B**
+for `dim_stops` because it was faster and the project was already
+pressuring time. Both work, both are defensible.
+
+**What I'd do next time:** default to A every time. Display logic in the
+warehouse is visible in code review, version-controlled, and works for
+any consumer (Tableau, ad-hoc SQL, future dashboards), not just this
+specific Power BI file. The speed benefit of B is small; the
+hidden-in-binary cost is not. Consistency matters more than the speed
+saved on any single chart.
 
 ---
 
@@ -259,6 +430,22 @@ natural place for this to land as the headline feature.
 - **Establish naming conventions early.** Mixed convention (some dims have
   `*_key`, some don't) made cleanup harder than it needed to be. Decide once,
   apply everywhere.
+- **Put units in column names AND verify they match the data.**
+  `total_distance_m` quietly contained km-valued data in this project,
+  hiding a 1000× error in every speed calculation. Either: enforce units
+  at ingestion (convert all distances to a single canonical unit before
+  storing), or be paranoid about audits when receiving distance/time/money
+  columns from external sources.
+- **Default to `INTERVAL` over `TIME` for any time arithmetic on data that
+  may include GTFS-style extended hours.** It's a free upgrade — same
+  syntax, more permissive, no edge-case errors on midnight-crossing data.
+  Reach for `::TIME` only when you specifically want clock-time bucketing
+  (e.g., classifying into peak/shoulder/off-peak time bands), and even
+  then normalise extended hours first.
+- **Keep display logic in dbt, not Power BI.** Doing the same display-name
+  work in two layers (`agency_display_name` via dbt + `dim_stops → dim_agency`
+  via Power BI relationship) was a missed consistency opportunity. Consumer
+  tools should read clean labels; the warehouse is where labels are defined.
 
 ---
 
@@ -299,3 +486,15 @@ Things I want to do _from day one_ on the next project:
 7. **Orchestration from the start.** Airflow (or equivalent) DAG that runs
    the pipeline end-to-end on a schedule, with proper failure handling and
    notifications. Not a v2 thought — designed in from day one.
+8. **Verify column units against actual data on ingestion.** Don't trust
+   column-name suffixes (`_m`, `_km`, `_secs`). Sanity-check a known
+   value against reality (or against the source's documentation) before
+   assuming the unit. Better still: convert everything to canonical
+   units at staging and never have ambiguity downstream.
+9. **Default to `::INTERVAL` for time math.** Avoids the GTFS extended-hours
+   trap from day one. Use `::TIME` only when clock-time bucketing is
+   specifically what you want, and normalise GTFS hours first.
+10. **All display logic in dbt, not BI tools.** Pretty labels, business-rule
+    case statements, reformatted strings — all belong in the warehouse so
+    every consumer sees the same clean values. BI tools render; they don't
+    define.

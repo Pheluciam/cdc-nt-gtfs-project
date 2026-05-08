@@ -1,6 +1,6 @@
 # CDC NT Transport Project — Session Context
 
-> Last updated: 2026-05-07 (end of second session)
+> Last updated: 2026-05-08 (mid-session 3, before break)
 
 ## Project overview
 
@@ -60,7 +60,9 @@ where a surrogate key exists.
 
 ## Power BI — relationships completed
 
-Active (9):
+Active (17):
+
+Core star (10):
 
 - fact_trips → dim_calendar on service_id
 - fact_trips → dim_trips on trip_id
@@ -71,6 +73,17 @@ Active (9):
 - fact_stop_times → dim_trips on trip_id
 - fact_stop_times → dim_stops on stop_key
 - dim_routes → dim_agency on agency_key
+- dim_stops → dim_agency on feed_id (added for clean labels in Stops per Agency chart)
+
+Summary tables (added session 3, 7):
+
+- route_kpis → dim_routes on route_id
+- route_service_days → dim_routes on route_id
+- trip_kpis → dim_routes on route_id
+- trip_kpis → dim_calendar on service_id
+- trip_kpis → dim_trips on trip_id
+- trip_kpis → dim_date on date (manually added)
+- trip_timebands → dim_trips on trip_id (changed from 1:1 to many-to-1 for consistency)
 
 Inactive (1):
 
@@ -81,15 +94,17 @@ trip count, total = 2070, correctly distributed across both feeds).
 
 ## Git status
 
-✅ Repo initialised, .gitignore configured (excludes .env, venvs, target,
-   TEACHING_PREFERENCES.md), first commit pushed to GitHub.
+✅ Repo on GitHub: https://github.com/Pheluciam/cdc-nt-gtfs-project
 
-Initial commit message: "Initial commit: GTFS ingestion, dbt warehouse with
-multi-feed surrogate keys, Power BI star schema"
+End of session 2 — pushed commit covering: dim_agency display name,
+LEARNINGS.md expansion, Power BI Overview page work.
 
-End-of-session-2 commit pending: needs `git add . && git commit -m "..."
-&& git push` covering today's dim_agency display name, LEARNINGS.md
-expansion, Power BI Overview page work.
+End of session 3 — commit pending. Covers: trip_timebands GTFS extended-hours
+fix (SUBSTRING/LPAD normalisation), trip_kpis fix (`::TIME` → `::INTERVAL`,
+column rename `total_distance_m` → `total_distance_km`, removed bogus /1000
+divisions), Power BI Network Coverage page complete, summary tables loaded
+into Power BI with 7 new relationships, LEARNINGS.md expanded with today's
+findings.
 
 ## Dashboard build status
 
@@ -115,14 +130,16 @@ public transport data."*
   - Trips per Agency bar chart with custom colours per agency
   - Uses `agency_display_name` (Darwin / Alice Springs) for clean labels
   - Minor formatting polish still wanted but not blocking
-- ⬜ **Page 2 — Network Coverage** not started
-  - Title + subtitle to add
-  - Map visual: dim_stops by lat/lon, coloured by feed_id
-  - Supporting bars: Routes per Agency, Stops per Agency
-- ⬜ **Page 3 — Service Operations** not started
-  - Trips by day-of-week (use dim_calendar)
-  - Trips by time band (use trip_timebands summary)
-  - Weekday vs weekend split
+- ✅ **Page 2 — Network Coverage** structurally complete
+  - Title + subtitle
+  - Map visual: dim_stops by lat/lon, coloured by feed_id (two clusters render correctly)
+  - Routes per Agency bar (Darwin 70-something, Alice Springs ~10)
+  - Stops per Agency bar (Darwin 669, Alice Springs 99, total 768)
+- 🔧 **Page 3 — Service Operations** in progress
+  - Title + subtitle done
+  - Time band visual built earlier (then blocked on GTFS extended-time issue, now resolved)
+  - All summary tables now loaded and relationships in place
+  - Still to build: time band chart (re-verify after dbt fix), day-of-week service distribution, weekday vs weekend split
 - ⬜ **Page 4 — Multi-Feed Comparison** not started
   - Side-by-side KPIs (Darwin vs Alice Springs)
   - Visual contrast — this is the headline page for the multi-feed engineering story

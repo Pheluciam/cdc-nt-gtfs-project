@@ -25,7 +25,7 @@ trip_bounds AS (
         MIN(arrival_time) AS first_arrival,
         MAX(departure_time) AS last_departure,
         COUNT(*) AS stop_count,
-        MAX(shape_dist_traveled)::FLOAT AS total_distance_m
+        MAX(shape_dist_traveled)::FLOAT AS total_distance_km
     FROM stop_times
     GROUP BY trip_id
 ),
@@ -59,19 +59,19 @@ kpis AS (
         t.shape_id,
         t.trip_headsign,
         b.stop_count,
-        b.total_distance_m / 1000.0 AS total_distance_km,
+        b.total_distance_km,
         CASE
-            WHEN b.total_distance_m > 0
-            THEN b.total_distance_m / 1000.0
+            WHEN b.total_distance_km > 0
+            THEN b.total_distance_km
             ELSE NULL
         END AS kms,
         CASE
-            WHEN b.total_distance_m > 0
+            WHEN b.total_distance_km > 0
              AND b.last_departure IS NOT NULL
              AND b.first_arrival IS NOT NULL
-             AND (b.last_departure::time > b.first_arrival::time)
-            THEN (b.total_distance_m / 1000.0) /
-                 ((EXTRACT(EPOCH FROM (b.last_departure::time - b.first_arrival::time))) / 3600.0)
+             AND (b.last_departure::INTERVAL > b.first_arrival::INTERVAL)
+            THEN b.total_distance_km /
+                 ((EXTRACT(EPOCH FROM (b.last_departure::INTERVAL - b.first_arrival::INTERVAL))) / 3600.0)
             ELSE NULL
         END AS avg_speed_kmh
     FROM trips t
