@@ -90,6 +90,33 @@ is wired up and producing usable analytics.
   transaction failed"* — that's the giveaway. Don't waste time
   troubleshooting tables that aren't the actual problem; find the one
   real failure (the underlying error usually points at it) and fix that.
+- **Sort by column doesn't auto-apply to existing visuals.** When you
+  set a column-level Sort by column relationship (e.g., `day_of_week`
+  sorted by `day_of_week_num`), existing visuals that use that column
+  don't pick up the new sort. They cache the column's properties at
+  visual-build time. Workaround: remove the field from the visual's
+  well, then drag it back in. That forces re-evaluation. Annoying quirk,
+  worth knowing — wasted ~15 minutes wondering why a "correctly set"
+  sort wasn't applying before realising the visual needed re-binding.
+- **DAX calculated columns: `SWITCH` for sort/lookup tables.** When
+  presentation logic should live in the BI tool rather than the
+  warehouse (one-tool-specific cosmetic preferences, not data
+  normalisation), DAX calculated columns are the right answer.
+
+  ```DAX
+  Agency Sort = SWITCH('wh_cdc_nt dim_agency'[feed_id], "darwin", 1, "alice_springs", 2, 99)
+  ```
+
+  Same logic as SQL `CASE WHEN`, more compact syntax. Two key syntax
+  notes: tables are referenced in `'single quotes'` (required when
+  the name contains a space, like `wh_cdc_nt dim_agency`), columns in
+  `[square brackets]`. String literals in `"double quotes"`. Function
+  names UPPERCASE.
+
+  Used this pattern to put Darwin before Alice Springs in a Matrix
+  visual. The dbt approach (adding agency_sort to dim_agency) would
+  have worked, but sort-order-for-one-dashboard is a presentation
+  concern, not a data concern.
 
 ### PostgreSQL
 
@@ -371,6 +398,42 @@ any consumer (Tableau, ad-hoc SQL, future dashboards), not just this
 specific Power BI file. The speed benefit of B is small; the
 hidden-in-binary cost is not. Consistency matters more than the speed
 saved on any single chart.
+
+### Where presentation logic actually belongs: warehouse vs BI tool
+
+Refined position after another session. The defaults I gave above
+("default to dbt") are right for things that are arguably *data
+normalisation* — clean display names, business-rule case statements,
+deduped values. But there's a category of presentation logic that
+genuinely doesn't belong in the warehouse:
+
+- **One-tool-specific cosmetic preferences** (e.g., "I want Darwin to
+  appear before Alice Springs in this *one* Matrix visual on this *one*
+  page of this Power BI file")
+- **Workarounds for BI tool limitations** (e.g., sort columns required
+  because Power BI's Matrix can't sort the column dimension easily)
+
+Polluting the warehouse with `agency_sort`, `timeband_sort`, etc.
+columns for every visual quirk creates schema bloat over time and
+tightly couples the warehouse to one BI tool's specific limitations.
+
+**The line I'm settling on:**
+
+- Would another consumer (Tableau, ad-hoc SQL, a future dashboard
+  in a different tool) want the same logic? **Yes → dbt**
+- Is this a one-tool, one-dashboard cosmetic preference?
+  **Yes → DAX (or accept the tool's default)**
+
+Used this principle on Page 4: needed Darwin before Alice Springs in
+the matrix. Created `Agency Sort` as a DAX calculated column in
+Power BI rather than adding `agency_sort` to dim_agency in dbt. The
+warehouse stays clean; the BI tool handles its own cosmetic preference.
+
+Same principle applies to *deferring fixes that aren't worth it*. The
+chronological time-band sort wasn't worth the time investment for a
+v1 portfolio piece. Leaving it count-descending and moving on was the
+right call. Knowing when to *stop* polishing is a senior engineering
+signal.
 
 ---
 

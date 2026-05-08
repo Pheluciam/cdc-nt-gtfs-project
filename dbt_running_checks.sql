@@ -1,5 +1,4 @@
-SELECT route_id, AVG(avg_speed_kmh) AS mean_speed
-FROM wh_cdc_nt.trip_kpis
-WHERE avg_speed_kmh IS NOT NULL
-GROUP BY route_id
-LIMIT 50;
+SELECT timeband, COUNT(DISTINCT timeband_sort) AS distinct_sorts
+FROM wh_cdc_nt.trip_timebands
+GROUP BY timeband
+HAVING COUNT(DISTINCT timeband_sort) > 1;

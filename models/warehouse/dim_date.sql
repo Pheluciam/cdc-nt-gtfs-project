@@ -10,5 +10,6 @@ SELECT
     EXTRACT(YEAR FROM date) AS year,
     EXTRACT(MONTH FROM date) AS month,
     EXTRACT(DAY FROM date) AS day,
-    TO_CHAR(date, 'Day') AS day_of_week
+    TRIM(TO_CHAR(date, 'Day')) AS day_of_week,
+    EXTRACT(ISODOW FROM date) AS day_of_week_num
 FROM date_series

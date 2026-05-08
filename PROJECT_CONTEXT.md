@@ -1,6 +1,6 @@
 # CDC NT Transport Project — Session Context
 
-> Last updated: 2026-05-08 (mid-session 3, before break)
+> Last updated: 2026-05-08 (end of session 4)
 
 ## Project overview
 
@@ -53,6 +53,8 @@ Models updated:
 - dim_agency: added `agency_key` and `agency_display_name` (clean labels: Darwin, Alice Springs)
 - fact_stop_times: added `stop_key` for matching dim_stops
 - dim_routes: added `agency_key` for matching dim_agency
+- dim_date: added `day_of_week_num` (ISO weekday Mon=1...Sun=7) for chronological sort; TRIM applied to day_of_week to remove TO_CHAR padding
+- trip_timebands: added `agency_display_name` (joined via dim_trips → dim_routes → dim_agency) and `timeband_sort` column
 
 Natural keys (route_id, trip_id, service_id, date, agency_id, stop_id)
 remain in tables for reference but should not be used for relationships
@@ -99,12 +101,18 @@ trip count, total = 2070, correctly distributed across both feeds).
 End of session 2 — pushed commit covering: dim_agency display name,
 LEARNINGS.md expansion, Power BI Overview page work.
 
-End of session 3 — commit pending. Covers: trip_timebands GTFS extended-hours
-fix (SUBSTRING/LPAD normalisation), trip_kpis fix (`::TIME` → `::INTERVAL`,
+End of session 3 — pushed: trip_timebands GTFS extended-hours fix
+(SUBSTRING/LPAD normalisation), trip_kpis fix (`::TIME` → `::INTERVAL`,
 column rename `total_distance_m` → `total_distance_km`, removed bogus /1000
 divisions), Power BI Network Coverage page complete, summary tables loaded
-into Power BI with 7 new relationships, LEARNINGS.md expanded with today's
-findings.
+into Power BI with 7 new relationships, LEARNINGS.md expanded.
+
+End of session 4 — commit pending. Covers: dim_date day_of_week_num + TRIM,
+trip_timebands restructured to derive timeband_sort from timeband (1:1 safe)
+and added agency_display_name via JOIN, Power BI Service Operations page
+complete (clustered bar charts with agency split), Multi-Feed Comparison
+page started with transposed matrix using "Show values on rows" toggle,
+DAX `Agency Sort` calculated column added in Power BI for column sort.
 
 ## Dashboard build status
 
@@ -135,23 +143,41 @@ public transport data."*
   - Map visual: dim_stops by lat/lon, coloured by feed_id (two clusters render correctly)
   - Routes per Agency bar (Darwin 70-something, Alice Springs ~10)
   - Stops per Agency bar (Darwin 669, Alice Springs 99, total 768)
-- 🔧 **Page 3 — Service Operations** in progress
+- ✅ **Page 3 — Service Operations** structurally complete
+  - Title + subtitle
+  - Trips by Time Band — clustered bar with agency split (Darwin/Alice Springs side-by-side per band)
+  - Service Trips by Day of Week — clustered bar with agency split, sorted Mon→Sun via day_of_week_num
+  - Note: time band chronological sort attempted but deferred — Power BI Sort by column 1:1 issue we couldn't isolate. Sort is by count-descending instead. Acceptable for v1
+- 🔧 **Page 4 — Multi-Feed Comparison** in progress
   - Title + subtitle done
-  - Time band visual built earlier (then blocked on GTFS extended-time issue, now resolved)
-  - All summary tables now loaded and relationships in place
-  - Still to build: time band chart (re-verify after dbt fix), day-of-week service distribution, weekday vs weekend split
-- ⬜ **Page 4 — Multi-Feed Comparison** not started
-  - Side-by-side KPIs (Darwin vs Alice Springs)
-  - Visual contrast — this is the headline page for the multi-feed engineering story
+  - Transposed matrix showing 4 metrics × 2 agencies (Routes/Trips/Stops/Stop visits, Darwin/Alice Springs as columns)
+  - Used Power BI's "Switch values to rows" toggle to flip the matrix orientation
+  - DAX `Agency Sort` calculated column on `wh_cdc_nt dim_agency` to put Darwin first (1) before Alice Springs (2)
+  - Sort by column applied to `agency_display_name` → `Agency Sort`
+  - Page feels sparse — needs one more visual
 
 ## Next steps — pick up here next session
 
 ### Priority 1 — finish the dashboard
 
-1. **Network Coverage (Page 2)** — title + subtitle + map (lat/lon from dim_stops, coloured by feed_id) + supporting bar charts (routes per agency, stops per agency)
-2. **Service Operations (Page 3)** — trips by day-of-week, trips by time band (trip_timebands), weekday vs weekend
-3. **Multi-Feed Comparison (Page 4)** — side-by-side KPIs and visuals contrasting Darwin and Alice Springs
-4. **Polish pass** — fonts, alignment, colours consistent across all 4 pages, page tab order correct
+Pages 2 and 3 are structurally complete. Remaining:
+
+1. **Page 1 — Overview**: feels sparse (5 KPI cards + 1 bar chart). Add one more visual for variety. Options to consider (no need to do them all):
+   - **Multi-row card** showing additional headline numbers (date range, avg trip distance, total km of service, etc.)
+   - **Treemap** of trip counts per agency (different from existing bar chart)
+   - **Top 10 routes by trip count** as a horizontal bar chart
+   - **Hour of day distribution** of trip start times — would need new column in trip_timebands or trip_kpis (`EXTRACT(HOUR FROM departure_time)` or similar). Genuinely different visual angle. Line/area chart works well
+
+2. **Page 4 — Multi-Feed Comparison**: matrix done, needs second visual that adds different angle. Options Phil flagged as interesting:
+   - **Average trip distance** by agency — uses `trip_kpis.kms` with AVERAGE aggregation, clustered bar
+   - **Average trip speed** by agency — uses `trip_kpis.avg_speed_kmh`, similar
+   - **Hour of day comparison** — line chart with two series (Darwin, Alice Springs) showing trip start times. Strongest "different angle" option. Same dbt addition needed as Overview's hour-of-day idea
+   - **Decomposition tree** — Power BI's analytical visual, breaks down trips → agency → route. Genuinely different, signals analytical sophistication
+   - **Scatter plot** — routes plotted by avg_speed × avg_distance, coloured by agency. Two routes could share a quadrant or differ wildly
+
+   Avoid: another donut/stacked bar (already used elsewhere).
+
+3. **Polish pass** — fonts, alignment, colours consistent across all 4 pages, page tab order correct.
 
 ### Priority 2 — make the project shippable
 
