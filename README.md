@@ -26,14 +26,14 @@ flowchart LR
 
 ## Tech stack
 
-| Layer | Tool |
-|---|---|
-| Source | GTFS-Static (CDC NT) — Darwin & Alice Springs feeds |
-| Ingestion | Python (CSV → PostgreSQL) |
-| Warehouse | PostgreSQL 15 |
-| Transformations | dbt (staging → intermediate → warehouse → summary) |
-| BI | Power BI Desktop |
-| Version control | Git + GitHub |
+| Layer           | Tool                                                |
+| --------------- | --------------------------------------------------- |
+| Source          | GTFS-Static (CDC NT) — Darwin & Alice Springs feeds |
+| Ingestion       | Python (CSV → PostgreSQL)                           |
+| Warehouse       | PostgreSQL 15                                       |
+| Transformations | dbt (staging → intermediate → warehouse → summary)  |
+| BI              | Power BI Desktop                                    |
+| Version control | Git + GitHub                                        |
 
 ---
 
@@ -79,7 +79,7 @@ This is the kind of issue that real-world DE work runs into when integrating mul
 
 ### GTFS extended-hour times
 
-GTFS allows departure times like `24:26:00` or `25:30:00` to mean *"next-day clock time, but still part of today's service day."* This is intentional in the spec — keeps a late-night trip that crosses midnight inside the same service-day grouping. PostgreSQL's `TIME` type rejects these values, so any `::TIME` cast errors out.
+GTFS allows departure times like `24:26:00` or `25:30:00` to mean _"next-day clock time, but still part of today's service day."_ This is intentional in the spec — keeps a late-night trip that crosses midnight inside the same service-day grouping. PostgreSQL's `TIME` type rejects these values, so any `::TIME` cast errors out.
 
 Resolved with `::INTERVAL` casts (which natively handle hours ≥ 24) and explicit normalisation in the time-band classification model.
 
@@ -136,12 +136,14 @@ cdc_nt_gtfs/
 ### Setup
 
 1. Clone the repo:
+
    ```bash
    git clone https://github.com/Pheluciam/cdc-nt-gtfs-project.git
    cd cdc-nt-gtfs-project
    ```
 
 2. Create the Python virtual environment and install dependencies:
+
    ```bash
    python -m venv dbt_venv
    ./dbt_venv/Scripts/Activate.ps1   # Windows PowerShell
@@ -154,11 +156,13 @@ cdc_nt_gtfs/
    - Configure `~/.dbt/profiles.yml` with your connection details (see `profiles.yml.example` if provided)
 
 4. Ingest the GTFS source data:
+
    ```bash
    python ingestion/ingest_gtfs.py
    ```
 
 5. Run dbt to build the warehouse models:
+
    ```bash
    dbt run
    dbt test
@@ -172,7 +176,7 @@ cdc_nt_gtfs/
 
 This repo contains several documents that go deeper than this README:
 
-- **`LEARNINGS.md`** — running journal of lessons learned, mistakes & diagnoses (the multi-feed key collision, GTFS extended hours, dbt vs Power BI architectural decisions, etc.). Strongest interview material
+- **`LEARNINGS.md`** — running journal of lessons learned, mistakes & diagnoses (the multi-feed key collision, GTFS extended hours, dbt vs Power BI architectural decisions, etc.).
 - **`NEXT_PROJECT.md`** — planning document for project #2 (cloud-native rebuild, supply chain / demand planning domain, MS SQL Server / Databricks / Airflow exploration)
 - **`PROJECT_CONTEXT.md`** — current state, working notes, and immediate next steps. Used as a session-restart anchor
 

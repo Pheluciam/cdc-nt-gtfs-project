@@ -168,6 +168,74 @@ with Snowflake + Airflow."* The updated direction suggests:
   Desktop with screenshots? Service is more impressive but adds setup work
 - Bigger or comparable scope to project #1? Don't bite off too much
 
+### Production-grade patterns to introduce (data marts + partitioning)
+
+These two concepts are foundational at production scale and don't appear in
+Project #1 because the GTFS dataset is too small to need them. Project #2
+should introduce both deliberately as part of the progression story.
+
+**Data marts (pre-aggregated layer):**
+
+- A focused, pre-aggregated table built for one specific dashboard or
+  question (e.g., `daily_sales_by_sku`, `weekly_revenue_by_region`)
+- BI tools query the mart, not the raw fact table — queries scan thousands
+  of rows instead of millions
+- In dbt: marts are usually a separate folder (`models/marts/`) downstream
+  of warehouse, often materialised as tables (not views) for query speed
+- Trade-off: less flexibility (the mart only answers the questions it was
+  designed for) for orders-of-magnitude faster queries
+
+**Partitioning:**
+
+- Splits a large table into chunks based on a column — usually date
+- Cloud warehouses (Snowflake, BigQuery, Databricks) charge per byte
+  scanned, so partitioning is the primary cost-control lever
+- A query with `WHERE sale_date BETWEEN '2026-01-01' AND '2026-01-31'`
+  on a date-partitioned table only scans January's partition, not the
+  whole table
+- Pairs naturally with **dbt incremental models** — only build the new
+  partition each day rather than rebuilding the entire table
+
+**For Project #2 (demand planning):**
+
+- Use a real demand-planning dataset (M5 / Rossmann) — these have millions
+  of rows where partitioning + marts are genuinely necessary, not optional
+- Partition fact tables by `sale_date` (or equivalent)
+- Build at least one mart per dashboard page as a deliberate pre-aggregation
+- Use `dbt incremental` materialisation for fact tables to demonstrate the
+  partition-aware load pattern
+
+**Why these matter for portfolio progression:**
+
+- Project #1 = foundational: star schema, dbt layers, BI integration
+- Project #2 = production-grade: orchestration, cloud, data marts,
+  partitioning, incremental loads
+- Project #3 = depending on direction (streaming? ML feature store? a
+  third stack?) — keep options open
+
+The progression "I learned the basics in #1, then built the patterns that
+matter at production scale in #2" is the strongest narrative for the
+3-project portfolio plan.
+
+---
+
+## Three-project portfolio plan
+
+Given the goal is to reach a strong beginner-to-intermediate Data Engineer
+level (not full senior DE) across three projects, here's a sketch of what
+each project should *uniquely* demonstrate:
+
+| Project | Headline | New things this introduces |
+|---|---|---|
+| **#1 — CDC NT Transport** (done) | End-to-end pipeline | dbt layers, star schema, multi-source surrogate keys, BI integration |
+| **#2 — Demand planning** (next) | Production-grade pipeline | Cloud warehouse, orchestration, data marts, partitioning, incremental loads, possibly medallion architecture |
+| **#3 — TBD** | Depends on what feels weakest after #2 | Options: streaming, ML feature store, multi-cloud, or deeper specialisation in #2's stack |
+
+The goal isn't a comprehensive DE portfolio (3 projects can't cover
+everything DE-related). It's a **credible progression story** — each
+project demonstrably more capable than the last, with intentional scope
+choices documented along the way.
+
 ---
 
 ## Things to bring forward from Project #1
@@ -205,7 +273,22 @@ These didn't come up in v1 because the project was too small or too local:
    - `dbt build` on PR (would need a test data warehouse or seed data)
    - SQL linting with `sqlfluff`
    - Build status badge in README
-- **Architecture diagram in README** (Mermaid) — front-of-house signal for hiring managers
+- **Architecture diagram in README** (Mermaid) — front-of-house framing for the project
+- **Power BI Format Painter** — efficiency tool I didn't use on v1 but should default to on v2.
+  Click a formatted visual → Home → Format Painter → click another visual → all formatting
+  copies across (font sizes, colours, padding, titles). Saves significant time when formatting
+  KPI card rows or matching chart styles across pages. Use as the default workflow rather than
+  reformatting each visual individually
+- **Architectural decision tracking — DAX vs warehouse vs marts.** Project #1 ended with a
+  loose principle: dbt for things any consumer would benefit from, DAX for tool-specific
+  cosmetic preferences. Project #2 should be more deliberate about this from day one. For each
+  presentation-layer decision (sort orders, display names, derived metrics, calculated columns):
+  - **In dbt warehouse?** If the logic is data normalisation that any consumer benefits from
+  - **In dbt marts/summary?** If it's pre-aggregation specific to BI consumption
+  - **In Power BI DAX?** If it's a one-tool, one-dashboard cosmetic preference
+  - **Accept the tool default?** If the polish-cost outweighs the benefit
+  Capture each call in `LEARNINGS.md` with a one-liner explaining why that layer was chosen.
+  This makes the architectural reasoning visible — useful for code review and self-reference
 
 ---
 

@@ -3,12 +3,27 @@ version: 2
 models:
   - name: dim_agency
     description: "Agency dimension table for CDC NT GTFS."
+    columns:
+      - name: agency_key
+        description: "Surrogate key (feed_id || '_' || agency_id). Unique across both feeds."
+        tests:
+          - not_null
+          - unique
+      - name: agency_id
+        description: "Natural key from source. NOT unique across feeds — Darwin and Alice Springs both use agency_id=1. Use agency_key for joins."
+        tests:
+          - not_null
 
   - name: dim_calendar
     description: "Calendar dimension derived from GTFS service calendars."
+    columns:
+      - name: service_id
+        tests:
+          - not_null
+          - unique
 
   - name: dim_calendar_dates
-    description: "Special service date overrides from GTFS calendar_dates."
+    description: "Special service date overrides from GTFS calendar_dates. Composite key (service_id, date)."
 
   - name: dim_date
     description: "Generic date dimension for reporting."
@@ -16,6 +31,7 @@ models:
       - name: date
         tests:
           - not_null
+          - unique
 
   - name: dim_routes
     description: "Route dimension table with route-level attributes."
@@ -23,12 +39,29 @@ models:
       - name: route_id
         tests:
           - not_null
+          - unique
+      - name: route_key
+        tests:
+          - not_null
+          - unique
+      - name: agency_key
+        description: "Foreign key to dim_agency. Built same way as dim_agency.agency_key."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_agency')
+              field: agency_key
 
   - name: dim_service_calendar
     description: "Service calendar dimension combining base and exception dates."
+    columns:
+      - name: service_id
+        tests:
+          - not_null
+          - unique
 
   - name: dim_shapes
-    description: "Shape dimension for route geometries."
+    description: "Shape dimension for route geometries. Composite key (shape_id, shape_pt_sequence)."
     columns:
       - name: shape_id
         tests:
@@ -37,7 +70,13 @@ models:
   - name: dim_stops
     description: "Stop dimension with stop locations and attributes."
     columns:
+      - name: stop_key
+        description: "Surrogate key (feed_id || '_' || stop_id). Unique across both feeds. THE FIX for multi-feed ID collision."
+        tests:
+          - not_null
+          - unique
       - name: stop_id
+        description: "Natural key from source. NOT unique — Darwin and Alice Springs both number stops from 1. Use stop_key for joins."
         tests:
           - not_null
 
@@ -47,6 +86,11 @@ models:
       - name: trip_id
         tests:
           - not_null
+          - unique
+      - name: trip_key
+        tests:
+          - not_null
+          - unique
 
   - name: fact_route_summary
     description: "Fact table summarising metrics at route level."
@@ -65,11 +109,13 @@ models:
           - relationships:
               to: ref('dim_trips')
               field: trip_id
-      - name: stop_id
+      - name: stop_key
+        description: "Foreign key to dim_stops. Built same way as dim_stops.stop_key."
         tests:
+          - not_null
           - relationships:
               to: ref('dim_stops')
-              field: stop_id
+              field: stop_key
 
   - name: fact_trips
     description: "Fact table of trips with key metrics."
@@ -99,4 +145,4 @@ models:
     description: "Pre-aggregated KPIs at trip level."
 
   - name: trip_timebands
-    description: "Trip metrics by time-of-day bands."
+    description: "Trip metrics by time-of-day bands. timeband: AM_PEAK / PM_PEAK / SHOULDER / OFF_PEAK; timeband_sort: 1-4 chronological order."

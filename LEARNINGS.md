@@ -42,7 +42,7 @@ is wired up and producing usable analytics.
   warehouse-layer fact and dim tables generally make sense as tables. Still
   learning when each makes sense.
 - **`dbt run` parses, doesn't execute (for views).** A clean `dbt run`
-  only proves the SQL *parses*. Bugs that only surface at query time —
+  only proves the SQL _parses_. Bugs that only surface at query time —
   type casts, range errors, missing columns in upstream views — won't show
   up until something actually reads from the view (Power BI, a downstream
   model, a manual `SELECT`). Hit this with a `::TIME` cast on a GTFS
@@ -83,11 +83,11 @@ is wired up and producing usable analytics.
   visual for plain tabular output.
 - **Transaction-cascade error display.** When Power BI's "Get Data" loads
   multiple tables in one batch, all tables go through PostgreSQL in a
-  single transaction. If *one* table's query errors out, the whole
-  transaction rolls back and Power BI shows "failed" against *every*
+  single transaction. If _one_ table's query errors out, the whole
+  transaction rolls back and Power BI shows "failed" against _every_
   table in that batch — even tables that would have loaded fine on their
-  own. The error message includes the phrase *"another operation in the
-  transaction failed"* — that's the giveaway. Don't waste time
+  own. The error message includes the phrase _"another operation in the
+  transaction failed"_ — that's the giveaway. Don't waste time
   troubleshooting tables that aren't the actual problem; find the one
   real failure (the underlying error usually points at it) and fix that.
 - **Sort by column doesn't auto-apply to existing visuals.** When you
@@ -118,6 +118,51 @@ is wired up and producing usable analytics.
   have worked, but sort-order-for-one-dashboard is a presentation
   concern, not a data concern.
 
+- **Power BI new Card visual quirks (free Desktop).** The "Card (new)"
+  visual is the modern default but has documented limitations:
+  - **Cannot horizontally centre callout text.** No format-pane setting
+    exists for it. Text is forced left-aligned. Documented limitation,
+    not a missed setting. Workarounds: switch to classic Card visual
+    (different icon, no lightning bolt), or accept it
+  - **Display Units (None / Thousands / Millions) is buried** under
+    Visual → Callout → Value. If your card shows "2.07K" and you want
+    "2,070", set Display Units to None AND apply a custom format code
+    like `#,0`. Both are needed; the format alone won't override
+    auto-display-units
+  - **Switching to the classic Card visual** is sometimes the right
+    answer for portfolio polish — it has reliable alignment and Display
+    Units in obvious places. Trade-off: lose any new-Card-specific
+    formatting on the switch
+- **Multi-Row Card vs Card vs Matrix for comparison layouts.** Three
+  options for showing multiple metrics across categories:
+  - **Card** — one big number per visual. Use when metric stands alone.
+    For 8 metrics × 2 categories, you'd need 16 separate cards.
+    Labour-intensive
+  - **Matrix** — compact grid (metrics × categories). Best for dense
+    comparisons but can look sparse on a dashboard page
+  - **Multi-Row Card** — multiple metrics in one card, one card per
+    category. Sweet spot between density and visual presence. Used this
+    for the Multi-Feed Comparison page (Darwin card / Alice Springs
+    card side-by-side)
+  - The matrix's "Show values on rows" toggle (sometimes called "Switch
+    values to rows" depending on version) flips orientation. Useful to
+    know — in some versions it's hidden under Format → Visual → Style
+    rather than the obvious Values section
+- **Sort by column doesn't accept many-to-one mappings.** Sort by
+  column requires a perfect 1:1 relationship between the display
+  column and the sort key. If multiple display values share the same
+  sort key (e.g., two `timeband` values both mapped to sort=2 due to
+  a SQL boundary bug), Power BI rejects the sort with "Can't sort
+  X by Y. There can't be more than one value in Y for the same value
+  in X." Fix: ensure the sort key is _derived from_ the display column
+  (1:1 by construction) rather than computed independently
+- **dbt tests caught the multi-feed work.** Adding `unique` tests on
+  the surrogate keys (`stop_key`, `agency_key`) confirmed via 28/28
+  passing tests that the surrogate-key engineering work holds. Tests
+  that would've caught the original v1 bug if they'd been there from
+  day 1. Cementing the carry-forward learning: **dbt tests on every
+  dim's primary key, from day one of every project**
+
 ### PostgreSQL
 
 - **Postgres is strict about types.** `WHERE stop_id = 101` failed with
@@ -142,12 +187,7 @@ table_schema = 'X' AND table_name = 'Y'` answers "is this column actually
 ### Star schema fundamentals (reinforced)
 
 - Knew this from BI work, but it crystallised this session: dim tables are
-  **lookup tables**, fact tables are **event logs**. dim_stops should have one
-  row per real-world stop. fact_stop_times should have many rows per stop —
-  one per visit. If a fact "dedupes" you've broken something, not fixed it.
-- The "one" side of a relationship needs unique keys. The "many" side doesn't.
-  Once that lens clicks, errors about cardinality become much easier to
-  diagnose.
+  **lookup tables**, fact tables are **event logs**.
 
 ### Working across the stack
 
@@ -164,9 +204,9 @@ table_schema = 'X' AND table_name = 'Y'` answers "is this column actually
 
 ## Mistakes & diagnoses
 
-These are the moments worth talking about in interviews.
-
 ### Multi-feed ID collision
+
+
 
 **Symptom:** Power BI refused to create the `fact_stop_times → dim_stops`
 relationship. `stop_id = 86` was duplicated.
@@ -241,7 +281,7 @@ appeared when Power BI tried to query the view.
 **Diagnosis:** Two stacked issues.
 
 First, the GTFS spec allows departure times like `24:26:00` or `25:30:00`
-to mean *"next-day clock time, but still part of today's service day."*
+to mean _"next-day clock time, but still part of today's service day."_
 This is intentional — keeps a late-night trip that crosses midnight inside
 the same service-day grouping rather than splitting it across two calendar
 dates. PostgreSQL's `TIME` type only accepts 0–23 hours, so any cast like
@@ -308,7 +348,7 @@ result as km. Speed was therefore 1000× too small.
   contained because the name said "metres."
 - **GTFS `shape_dist_traveled` units are agency-specific.** The spec
   doesn't enforce metres or km — different feeds use different units,
-  some leave it null. When ingesting GTFS, the unit is *always* worth
+  some leave it null. When ingesting GTFS, the unit is _always_ worth
   verifying against the feed's `feed_info.txt` or by sanity-checking a
   known route's real-world length against the column's value.
 - When derived metrics look wrong, **trace the units** before assuming
@@ -319,7 +359,7 @@ result as km. Speed was therefore 1000× too small.
 
 **Symptom:** Tried to "Get Data" five new summary tables. Got an error
 referencing PostgreSQL `22008: date/time field value out of range`.
-Then opened Manage Tables and saw *all 15 tables* (10 existing + 5 new)
+Then opened Manage Tables and saw _all 15 tables_ (10 existing + 5 new)
 showing as failed — including tables I hadn't touched.
 
 **Diagnosis:** Power BI batches table loads into a single PostgreSQL
@@ -328,8 +368,8 @@ hour value, in `trip_kpis`), the transaction rolled back, and every
 table in the batch was marked failed by Power BI — not just the one
 that actually broke.
 
-The original error message included the phrase *"The current operation
-was cancelled because another operation in the transaction failed"* —
+The original error message included the phrase _"The current operation
+was cancelled because another operation in the transaction failed"_ —
 that's the cascade signal.
 
 **Fix:** Found the real failing model (`trip_kpis` doing `::TIME` casts
@@ -340,7 +380,7 @@ loaded cleanly.
 **What this taught me:**
 
 - Don't waste time investigating every "failed" table when Power BI
-  reports a batch failure. Look for the *root cause* error in the
+  reports a batch failure. Look for the _root cause_ error in the
   transaction; the rest are symptoms.
 - The "another operation failed" phrasing is the diagnostic flag. When
   you see it, the failure is upstream of what you think you're looking at.
@@ -402,13 +442,13 @@ saved on any single chart.
 ### Where presentation logic actually belongs: warehouse vs BI tool
 
 Refined position after another session. The defaults I gave above
-("default to dbt") are right for things that are arguably *data
-normalisation* — clean display names, business-rule case statements,
+("default to dbt") are right for things that are arguably _data
+normalisation_ — clean display names, business-rule case statements,
 deduped values. But there's a category of presentation logic that
 genuinely doesn't belong in the warehouse:
 
 - **One-tool-specific cosmetic preferences** (e.g., "I want Darwin to
-  appear before Alice Springs in this *one* Matrix visual on this *one*
+  appear before Alice Springs in this _one_ Matrix visual on this _one_
   page of this Power BI file")
 - **Workarounds for BI tool limitations** (e.g., sort columns required
   because Power BI's Matrix can't sort the column dimension easily)
@@ -429,11 +469,10 @@ the matrix. Created `Agency Sort` as a DAX calculated column in
 Power BI rather than adding `agency_sort` to dim_agency in dbt. The
 warehouse stays clean; the BI tool handles its own cosmetic preference.
 
-Same principle applies to *deferring fixes that aren't worth it*. The
+Same principle applies to _deferring fixes that aren't worth it_. The
 chronological time-band sort wasn't worth the time investment for a
 v1 portfolio piece. Leaving it count-descending and moving on was the
-right call. Knowing when to *stop* polishing is a senior engineering
-signal.
+right call.
 
 ---
 
@@ -466,9 +505,8 @@ with timetable updates.
 - Airflow setup adds substantial complexity (scheduler, web UI, often
   Docker). Worth introducing as the headline feature of the next project
   rather than a footnote in this one
-- For interview purposes, being able to articulate the orchestration
-  design — which I can — captures most of the value. Implementation comes
-  in project #2
+- Being able to articulate the orchestration design captures most of
+  the value at this stage of my learning. Implementation comes in project #2.
 
 The cloud-native rebuild (planned project #2: Snowflake + Airflow) is the
 natural place for this to land as the headline feature.
