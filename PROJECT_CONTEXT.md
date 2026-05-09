@@ -1,10 +1,15 @@
 # CDC NT Transport Project — Session Context
 
-> Last updated: 2026-05-08 (end of session 4)
+> **STATUS: v1 SHIPPED** (2026-05-09)
+>
+> Project complete. Commit `4a5ebe9` is the v1 ship commit on `main`.
+> See `NEXT_PROJECT.md` for project #2 planning.
+
+---
 
 ## Project overview
 
-- Data Engineering portfolio project for job interviews
+- Data Engineering portfolio project
 - Source data: CDC NT Darwin and Alice Springs GTFS-S (static)
 - Stack: Python ingestion → dbt → PostgreSQL → Power BI
 - Database: CDC_NT | Warehouse schema: wh_cdc_nt
@@ -13,9 +18,33 @@
 - GitHub repo: https://github.com/Pheluciam/cdc-nt-gtfs-project (public)
 - Teaching preferences: see `TEACHING_PREFERENCES.md` for how Claude should work with me
 
+---
+
+## v1 ship summary
+
+- ✅ End-to-end pipeline working: Python ingestion → PostgreSQL → dbt (36 models) → Power BI (4 pages)
+- ✅ Multi-feed surrogate key engineering (handled the Darwin/Alice Springs ID collision)
+- ✅ GTFS extended-hours fix (`::INTERVAL` over `::TIME` for time math)
+- ✅ Star schema with deliberate snowflakes (`dim_routes → dim_agency`, `dim_stops → dim_agency`)
+- ✅ 28 dbt tests passing (`unique` + `not_null` on all dim primary keys, plus relationship tests)
+- ✅ 4-page Power BI dashboard with consistent theme, screenshots embedded in README
+- ✅ Mermaid architecture diagram in README
+- ✅ Git repo public, clean commit history
+- ✅ LEARNINGS.md, NEXT_PROJECT.md, README.md all in place
+
+**v1 deliberate scope decisions** (documented as carry-forward to project #2):
+
+- Manual pipeline (no orchestration) — Airflow is the headline feature for project #2
+- Local PostgreSQL (no cloud warehouse) — cloud is the v2 platform
+- Hand-rolled surrogate keys (`||` concatenation rather than `dbt_utils.generate_surrogate_key`)
+- No CI/CD pipeline (deliberate v2 addition)
+- No incremental models (whole pipeline rebuilds each run — fine for static data)
+
+---
+
 ## Working habits — standing reminders
 
-> Claude: surface these at the start of each session and prompt me when relevant.
+> Carry these forward to project #2 — same habits, fresh repo.
 
 - **Pull at the start of each session** — `git pull` before making changes
 - **Git: commit regularly.** After every meaningful change (a fix, a new
@@ -23,189 +52,89 @@
   message. Don't let work pile up uncommitted.
 - **Push to GitHub at the end of each session** so the remote repo reflects
   the latest progress (also acts as a backup).
-- **README stays current.** If today's session added a new model, dependency,
+- **README stays current.** If a session added a new model, dependency,
   or design decision, update `README.md` before pushing.
 - **LEARNINGS.md captures takeaways.** At the end of each session — or whenever
   something clicks, breaks, or surprises me — add an entry to `LEARNINGS.md`
   while it's fresh. Short, honest reflections: what worked, what tripped me
-  up, what I'd do differently. This is portfolio material and interview prep.
+  up, what I'd do differently.
+- **Read `LEARNINGS.md` at the start AND end of each session.** Start: re-anchor
+  in what I learned previously. End: reinforce what's worth capturing from today.
 
-## dbt warehouse models
+---
 
-Fact tables: fact_stop_times, fact_trips, fact_route_summary,
-fact_service_days, fact_stop_sequences
+## dbt warehouse models (final state)
 
-Dim tables: dim_agency, dim_calendar, dim_calendar_dates, dim_date,
-dim_routes, dim_service_calendar, dim_shapes, dim_stops, dim_trips
+Fact tables: `fact_stop_times`, `fact_trips`, `fact_route_summary`,
+`fact_service_days`, `fact_stop_sequences`
 
-Summary tables: route_kpis, trip_kpis, route_service_days,
-shape_summary, stop_activity_summary, trip_timebands
+Dim tables: `dim_agency`, `dim_calendar`, `dim_calendar_dates`, `dim_date`,
+`dim_routes`, `dim_service_calendar`, `dim_shapes`, `dim_stops`, `dim_trips`
 
-## Surrogate key convention
+Summary / mart tables: `route_kpis`, `trip_kpis`, `route_service_days`,
+`shape_summary`, `stop_activity_summary`, `trip_timebands`
 
-Both source feeds (Darwin and Alice Springs) reuse the same numeric IDs
-for different real-world entities, causing duplicate keys when combined.
-Resolution: composite surrogate keys built as `feed_id || '_' || natural_id`.
+Surrogate keys added: `stop_key` (dim_stops + fact_stop_times), `agency_key`
+(dim_agency + dim_routes), `agency_display_name`, `day_of_week_num`,
+`timeband_sort`.
 
-Models updated:
+---
 
-- dim_stops: added `stop_key` (e.g. `darwin_101`, `alice_springs_101`)
-- dim_agency: added `agency_key` and `agency_display_name` (clean labels: Darwin, Alice Springs)
-- fact_stop_times: added `stop_key` for matching dim_stops
-- dim_routes: added `agency_key` for matching dim_agency
-- dim_date: added `day_of_week_num` (ISO weekday Mon=1...Sun=7) for chronological sort; TRIM applied to day_of_week to remove TO_CHAR padding
-- trip_timebands: added `agency_display_name` (joined via dim_trips → dim_routes → dim_agency) and `timeband_sort` column
+## Power BI dashboard — final state
 
-Natural keys (route_id, trip_id, service_id, date, agency_id, stop_id)
-remain in tables for reference but should not be used for relationships
-where a surrogate key exists.
+**4 pages, all complete:**
 
-## Power BI — relationships completed
+1. ✅ **Overview** — title + pitch, 5 KPI cards (Agencies, Routes, Trips, Stops, Stop Visits), Trips by Agency bar, Routes treemap
+2. ✅ **Network Coverage** — title + subtitle, stops map (lat/lon), Routes per Agency donut, Stops per Agency donut
+3. ✅ **Service Operations** — title + subtitle, Trips by Time Band clustered bar, Service Trips by Day of Week clustered bar
+4. ✅ **Multi-Feed Comparison** — title + subtitle, two side-by-side multi-row cards (Darwin, Alice Springs), Average Kilometres by Agency bar
 
-Active (17):
+**Theme:** Frontier. **Colours:** Darwin teal, Alice Springs gold/ochre.
 
-Core star (10):
+**Power BI relationships:** 17 active + 1 inactive (full list previously documented; star schema verified end-to-end with functional test totalling 2,070 trips correctly distributed).
 
-- fact_trips → dim_calendar on service_id
-- fact_trips → dim_trips on trip_id
-- fact_trips → dim_routes on route_id
-- fact_service_days → dim_calendar on service_id
-- fact_service_days → dim_date on date
-- fact_route_summary → dim_routes on route_id
-- fact_stop_times → dim_trips on trip_id
-- fact_stop_times → dim_stops on stop_key
-- dim_routes → dim_agency on agency_key
-- dim_stops → dim_agency on feed_id (added for clean labels in Stops per Agency chart)
+---
 
-Summary tables (added session 3, 7):
+## Git history
 
-- route_kpis → dim_routes on route_id
-- route_service_days → dim_routes on route_id
-- trip_kpis → dim_routes on route_id
-- trip_kpis → dim_calendar on service_id
-- trip_kpis → dim_trips on trip_id
-- trip_kpis → dim_date on date (manually added)
-- trip_timebands → dim_trips on trip_id (changed from 1:1 to many-to-1 for consistency)
+Final commit: `4a5ebe9 — v1 SHIP: dbt tests added (28 passing), README + architecture diagram, NEXT_PROJECT updates, LEARNINGS cleanup`
 
-Inactive (1):
+Previous commits (recent first):
 
-- dim_trips → dim_calendar on service_id
+- `4a5ebe9` — v1 SHIP
+- `9fb2dca` — Add NEXT_PROJECT.md roadmap and session sanity checks
+- `088de32` — Session 4: Service Operations + Multi-Feed Comparison pages, dim_date day_of_week_num, trip_timebands restructured for safe 1:1 sort, DAX Agency Sort column, LEARNINGS expanded
+- `b33b476` — Session 3: GTFS extended-time fixes, trip_kpis unit correction, Network Coverage page, summary tables loaded, LEARNINGS expanded
+- ... (full history visible via `git log --oneline`)
 
-Star schema verified end-to-end via functional test (agency × route ×
-trip count, total = 2070, correctly distributed across both feeds).
+---
 
-## Git status
+## Next steps
 
-✅ Repo on GitHub: https://github.com/Pheluciam/cdc-nt-gtfs-project
+**For this project:** none. v1 is shipped. Anything beyond is optional polish (see `NEXT_PROJECT.md` "Things to bring forward" for what would be carried to v2).
 
-End of session 2 — pushed commit covering: dim_agency display name,
-LEARNINGS.md expansion, Power BI Overview page work.
+**For project #2:** see `NEXT_PROJECT.md` for the full roadmap. Headline plan:
+cloud-native rebuild on a supply-chain / demand-planning dataset, with
+orchestration via Airflow as the headline feature. MS SQL Server, Databricks,
+or Snowflake stack to be decided.
 
-End of session 3 — pushed: trip_timebands GTFS extended-hours fix
-(SUBSTRING/LPAD normalisation), trip_kpis fix (`::TIME` → `::INTERVAL`,
-column rename `total_distance_m` → `total_distance_km`, removed bogus /1000
-divisions), Power BI Network Coverage page complete, summary tables loaded
-into Power BI with 7 new relationships, LEARNINGS.md expanded.
+**For ongoing leverage of project #1:**
 
-End of session 4 — commit pending. Covers: dim_date day_of_week_num + TRIM,
-trip_timebands restructured to derive timeband_sort from timeband (1:1 safe)
-and added agency_display_name via JOIN, Power BI Service Operations page
-complete (clustered bar charts with agency split), Multi-Feed Comparison
-page started with transposed matrix using "Show values on rows" toggle,
-DAX `Agency Sort` calculated column added in Power BI for column sort.
-
-## Dashboard build status
-
-**Locked-in structure:** 4 pages
-
-1. **Overview** — KPIs and headline framing
-2. **Network Coverage** — geographic / map page
-3. **Service Operations** — frequencies, calendars, time-of-day bands
-4. **Multi-Feed Comparison** — Darwin vs Alice Springs side-by-side
-   (showcases the multi-feed engineering work)
-
-**Elevator pitch (used as Overview subtitle):**
-*"From raw CSVs to interactive dashboard: a complete data engineering
-workflow demonstrating ingestion (Python), warehouse modelling
-(dbt + PostgreSQL), and BI integration (Power BI), built around real-world
-public transport data."*
-
-### Page progress
-
-- ✅ **Page 1 — Overview** structurally complete
-  - Title + elevator pitch text boxes
-  - 5 KPI cards: Routes (83), Trips (2,070), Stops (768), Stop visits (~50k+), Agencies (2)
-  - Trips per Agency bar chart with custom colours per agency
-  - Uses `agency_display_name` (Darwin / Alice Springs) for clean labels
-  - Minor formatting polish still wanted but not blocking
-- ✅ **Page 2 — Network Coverage** structurally complete
-  - Title + subtitle
-  - Map visual: dim_stops by lat/lon, coloured by feed_id (two clusters render correctly)
-  - Routes per Agency bar (Darwin 70-something, Alice Springs ~10)
-  - Stops per Agency bar (Darwin 669, Alice Springs 99, total 768)
-- ✅ **Page 3 — Service Operations** structurally complete
-  - Title + subtitle
-  - Trips by Time Band — clustered bar with agency split (Darwin/Alice Springs side-by-side per band)
-  - Service Trips by Day of Week — clustered bar with agency split, sorted Mon→Sun via day_of_week_num
-  - Note: time band chronological sort attempted but deferred — Power BI Sort by column 1:1 issue we couldn't isolate. Sort is by count-descending instead. Acceptable for v1
-- 🔧 **Page 4 — Multi-Feed Comparison** in progress
-  - Title + subtitle done
-  - Transposed matrix showing 4 metrics × 2 agencies (Routes/Trips/Stops/Stop visits, Darwin/Alice Springs as columns)
-  - Used Power BI's "Switch values to rows" toggle to flip the matrix orientation
-  - DAX `Agency Sort` calculated column on `wh_cdc_nt dim_agency` to put Darwin first (1) before Alice Springs (2)
-  - Sort by column applied to `agency_display_name` → `Agency Sort`
-  - Page feels sparse — needs one more visual
-
-## Next steps — pick up here next session
-
-### Priority 1 — finish the dashboard
-
-Pages 2 and 3 are structurally complete. Remaining:
-
-1. **Page 1 — Overview**: feels sparse (5 KPI cards + 1 bar chart). Add one more visual for variety. Options to consider (no need to do them all):
-   - **Multi-row card** showing additional headline numbers (date range, avg trip distance, total km of service, etc.)
-   - **Treemap** of trip counts per agency (different from existing bar chart)
-   - **Top 10 routes by trip count** as a horizontal bar chart
-   - **Hour of day distribution** of trip start times — would need new column in trip_timebands or trip_kpis (`EXTRACT(HOUR FROM departure_time)` or similar). Genuinely different visual angle. Line/area chart works well
-
-2. **Page 4 — Multi-Feed Comparison**: matrix done, needs second visual that adds different angle. Options Phil flagged as interesting:
-   - **Average trip distance** by agency — uses `trip_kpis.kms` with AVERAGE aggregation, clustered bar
-   - **Average trip speed** by agency — uses `trip_kpis.avg_speed_kmh`, similar
-   - **Hour of day comparison** — line chart with two series (Darwin, Alice Springs) showing trip start times. Strongest "different angle" option. Same dbt addition needed as Overview's hour-of-day idea
-   - **Decomposition tree** — Power BI's analytical visual, breaks down trips → agency → route. Genuinely different, signals analytical sophistication
-   - **Scatter plot** — routes plotted by avg_speed × avg_distance, coloured by agency. Two routes could share a quadrant or differ wildly
-
-   Avoid: another donut/stacked bar (already used elsewhere).
-
-3. **Polish pass** — fonts, alignment, colours consistent across all 4 pages, page tab order correct.
-
-### Priority 2 — make the project shippable
-
-5. **README.md** — flesh out for hiring managers: overview, stack, architecture, how to run, key design decisions, screenshots of dashboard pages embedded
-6. **Dashboard screenshots** — export each page as PNG, embed in README
-7. **dbt tests** — add `unique` and `not_null` tests on every dim's primary key in `models/warehouse/warehouse_schema.yml`. The duplicate-key issue would have been caught by these. Strong DE signal
-8. **Final commit + push** — capture all dashboard work, README, screenshots, dbt tests in a clean commit. End-state for v1
-
-### Priority 3 — optional polish (when motivated)
-
-- Refactor surrogate keys to use `dbt_utils.generate_surrogate_key()`
-- Add basic GitHub Actions CI workflow (free DE signal)
-- Add architecture diagram to README
-
-### Priority 4 — leverage the project
-
-- Add to LinkedIn (Featured section, with screenshot + tagline + repo link)
 - Add to resume's Projects section
 - Pin the repo on GitHub profile
-- Prepare 2–3 interview stories from LEARNINGS — multi-feed key collision is the strongest
+- Prepare 2–3 interview stories from LEARNINGS
+
+---
 
 ## Future projects planned
 
 Tableau, Snowflake, Airflow, Databricks, PySpark,
-AWS, Azure, Google Cloud, SQL Server
+AWS, Azure, Google Cloud, SQL Server, MS SQL Server.
 
-**Headline plan for project #2:** cloud-native rebuild (Snowflake + Airflow)
-with orchestration as the headline feature. Apply carry-forward learnings
-from this project's `LEARNINGS.md`: Git from day 1, dbt tests early,
-naming conventions documented, source identifiers carried through every
-layer, dbt_utils.generate_surrogate_key from the start.
+**Three-project plan** (per `NEXT_PROJECT.md`):
+
+| Project | Headline | Status |
+|---|---|---|
+| **#1 — CDC NT Transport** | End-to-end pipeline | ✅ SHIPPED |
+| **#2 — Demand Planning** | Production-grade pipeline (orchestration, cloud, marts, partitioning) | Planned — see NEXT_PROJECT.md |
+| **#3 — TBD** | Depends on what feels weakest after #2 | TBD |
