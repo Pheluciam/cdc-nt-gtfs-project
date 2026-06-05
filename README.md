@@ -1,12 +1,22 @@
 # CDC NT Transport Project
 
-> End-to-end data engineering portfolio project — from raw CSV files to interactive Power BI dashboard.
+> dbt-first analytics pipeline — GTFS-Static public-transport feeds (Darwin +
+> Alice Springs) → Python ingestion → PostgreSQL → dbt star schema
+> (staging → intermediate → warehouse → summary) → 4-page Power BI dashboard.
+> Project #1 of Phil's data-engineering portfolio.
 
-A complete data engineering workflow demonstrating ingestion, warehouse modelling, and BI integration, built around real-world public transport data from the Northern Territory of Australia.
+**Status: COMPLETE — shipped 2026-05-09.** End-to-end and interview-ready: Python ingestion → PostgreSQL → dbt (36 models, 28 passing tests) → 4-page Power BI dashboard, built on real Northern Territory GTFS feeds. Full build history, design decisions and the lessons log live in `PROJECT_CONTEXT.md` and `LEARNINGS.md`.
 
-The project ingests GTFS-Static feeds from the Northern Territory's two transit agencies (Darwin and Alice Springs), models them in a star schema using dbt and PostgreSQL, and surfaces the result in a Power BI dashboard.
+## What this project demonstrates
 
----
+- **End-to-end pipeline** from a raw public-data source (GTFS-Static feeds) to a BI dashboard
+- **Multi-source integration** — two NT transit feeds (Darwin + Alice Springs) combined with composite surrogate keys (`feed_id || '_' || natural_id`) that resolve cross-feed ID collisions
+- **Kimball star schema** (fact + dim tables) with two deliberate dim-to-dim snowflake links (`dim_routes → dim_agency`, `dim_stops → dim_agency`)
+- **Layered dbt modelling** — 36 models across staging → intermediate → warehouse → summary
+- **dbt data tests** — 28 passing (`unique` + `not_null` on every dim primary key, plus relationship tests)
+- **Real-world data-quirk handling** — GTFS extended-hour times (`24:00+`) resolved with `::INTERVAL` casts; agency-specific distance units verified at ingestion
+- **Display logic in dbt, not the BI tool** — human-readable names derived in the warehouse so any consumer sees clean labels
+- **4-page Power BI** dashboard (Import mode `.pbix` — opens standalone for reviewers)
 
 ## Architecture
 
@@ -22,177 +32,110 @@ flowchart LR
     G --> H
 ```
 
----
+## Stack
 
-## Tech stack
-
-| Layer           | Tool                                                |
-| --------------- | --------------------------------------------------- |
-| Source          | GTFS-Static (CDC NT) — Darwin & Alice Springs feeds |
-| Ingestion       | Python (CSV → PostgreSQL)                           |
-| Warehouse       | PostgreSQL 15                                       |
-| Transformations | dbt (staging → intermediate → warehouse → summary)  |
-| BI              | Power BI Desktop                                    |
-| Version control | Git + GitHub                                        |
-
----
-
-## Dashboard
-
-The dashboard has 4 pages, each focusing on a different angle of the transit data.
-
-### Page 1 — Overview
-
-Headline KPIs and project framing.
-
-![Overview page](screenshots/01_overview.png)
-
-### Page 2 — Network Coverage
-
-Geographic distribution of stops across both NT transit networks. The map proves the multi-feed pipeline works — two distinct clusters of stops appear roughly 1,500 km apart (Darwin in the north, Alice Springs in the central NT).
-
-![Network Coverage page](screenshots/02_network_coverage.png)
-
-### Page 3 — Service Operations
-
-When the networks run — by time of day and day of week. Both networks show flat day-of-week patterns, suggesting consistent service rather than typical commuter peaks.
-
-![Service Operations page](screenshots/03_service_operations.png)
-
-### Page 4 — Multi-Feed Comparison
-
-Darwin vs Alice Springs side-by-side. Darwin operates roughly 10× the volume of Alice Springs across every metric, but average trip distances are nearly identical (9.17 km vs 9.55 km) — both networks follow urban-style design despite the size difference.
-
-![Multi-Feed Comparison page](screenshots/04_multi_feed_comparison.png)
-
----
-
-## Key design decisions
-
-### Multi-feed surrogate keys
-
-Both source feeds (Darwin and Alice Springs) reuse the same numeric IDs for different real-world entities — Darwin's stop `101` and Alice Springs' stop `101` are completely different stops in different cities, but the source data labels them identically. Combining the two feeds without distinguishing the source caused 75 duplicate `stop_id` values in the warehouse.
-
-The fix: composite surrogate keys built as `feed_id || '_' || natural_id`, producing readable values like `darwin_101` and `alice_springs_101`. Applied to `dim_stops`, `dim_agency`, `fact_stop_times`, and `dim_routes`.
-
-This is the kind of issue that real-world DE work runs into when integrating multiple data sources — handled at the warehouse layer rather than working around it in BI.
-
-### GTFS extended-hour times
-
-GTFS allows departure times like `24:26:00` or `25:30:00` to mean _"next-day clock time, but still part of today's service day."_ This is intentional in the spec — keeps a late-night trip that crosses midnight inside the same service-day grouping. PostgreSQL's `TIME` type rejects these values, so any `::TIME` cast errors out.
-
-Resolved with `::INTERVAL` casts (which natively handle hours ≥ 24) and explicit normalisation in the time-band classification model.
-
-### Star schema with deliberate snowflakes
-
-Core star schema (fact + dim tables), with two intentional dim-to-dim "snowflake" relationships: `dim_routes → dim_agency` and `dim_stops → dim_agency`. These let visualisations slice fact data by agency without requiring extra lookups in DAX.
-
-### Display logic in dbt, not BI
-
-Clean human-readable names (`Darwin`, `Alice Springs`) were derived in dbt warehouse models rather than Power BI calculated columns. This keeps presentation logic version-controlled and visible to any future consumer of the warehouse, not just this specific Power BI file.
-
-For deeper architectural reflection — see `LEARNINGS.md`.
-
----
+| Layer | Choice |
+|---|---|
+| Source | GTFS-Static (CDC NT) — Darwin & Alice Springs feeds |
+| Ingestion | Python (CSV → PostgreSQL) |
+| Warehouse | PostgreSQL 15 |
+| Transformation | dbt (staging → intermediate → warehouse → summary) |
+| Modeling | Kimball star schema with deliberate snowflakes |
+| BI | Power BI Desktop (Import mode `.pbix`) |
+| Version control | Git + GitHub |
 
 ## Project structure
 
 ```
 cdc_nt_gtfs/
-├── ingestion/                 # Python GTFS ingestion script
+├── ingestion/                     # Python GTFS ingestion script
 │   └── ingest_gtfs.py
-├── gtfs_data/                 # Source CSV files
+├── gtfs_data/                     # Source CSV feeds
 │   ├── extracted_darwin/
 │   └── extracted_alice_springs/
-├── models/                    # dbt models
-│   ├── staging/               # stg_* (column cleanup, type casting)
-│   ├── intermediate/          # int_* (business logic joins)
-│   └── warehouse/             # dim_* / fact_* / *_kpis (BI-ready)
-├── macros/                    # Custom dbt macros
-├── tests/                     # dbt tests
-├── seeds/                     # Static reference data
-├── snapshots/                 # SCD snapshots (none active in v1)
-├── analyses/                  # Ad-hoc analytical SQL
-├── screenshots/               # Dashboard exports
+├── models/                        # dbt models (36 total)
+│   ├── staging/                   # stg_* (column cleanup, type casting)
+│   ├── intermediate/              # int_* (business-logic joins)
+│   └── warehouse/                 # dim_* / fact_* / *_kpis (BI-ready)
+├── macros/                        # Custom dbt macros
+├── tests/                         # dbt tests
+├── seeds/                         # Static reference data
+├── snapshots/                     # SCD snapshots (none active in v1)
+├── analyses/                      # Ad-hoc analytical SQL
+├── screenshots/                   # Dashboard exports
 ├── CDC_NT Transport Project.pbix  # Power BI dashboard
-├── dbt_project.yml            # dbt configuration
-├── README.md                  # this file
-├── LEARNINGS.md               # Lessons learned, mistakes & diagnoses, design decisions
-├── NEXT_PROJECT.md            # Roadmap for project #2
-└── PROJECT_CONTEXT.md         # Working state and session context
+├── dbt_project.yml                # dbt configuration
+├── README.md                      # this file
+├── LEARNINGS.md                   # lessons learned, diagnoses, design decisions
+├── PROJECT_CONTEXT.md             # working state and session context
+├── NEXT_PROJECT.md                # end-of-project-1 portfolio roadmap journal
+└── TEACHING_PREFERENCES.md        # how I like to work / learning preferences
 ```
 
----
+## How this project was built
 
-## Running the project
+This project was built using AI-assisted pair programming (Claude by Anthropic).
+All architecture decisions, technology selections, and final design choices are
+my own; the AI accelerated implementation and acted as a senior-DE code reviewer.
+The intent of the project is portfolio learning — every component was built with
+explicit understanding of what it does and why. Design decisions and the
+diagnosis → fix → lesson loops are documented in `LEARNINGS.md`.
 
-### Prerequisites
+## Project documents
 
-- Python 3.11+
-- PostgreSQL 15+ (local or hosted)
-- dbt-core with the postgres adapter
-- Power BI Desktop (for the .pbix file)
+- `LEARNINGS.md` — lessons-learned journal: diagnosis → fix → lesson loops (the multi-feed key collision, GTFS extended hours, the dbt-vs-Power BI architecture line)
+- `PROJECT_CONTEXT.md` — running session state + the v1 ship summary
+- `NEXT_PROJECT.md` — roadmap journal written at the end of Project #1, sketching the portfolio progression that became Projects #2 and #3
+- `TEACHING_PREFERENCES.md` — how I like to work and where I want more or less detail
 
-### Setup
+## Dashboard
 
-1. Clone the repo:
+Four pages built in Power BI Desktop on the dbt warehouse. Import storage mode —
+the `.pbix` opens standalone for reviewers. Live report:
+`CDC_NT Transport Project.pbix`.
 
-   ```bash
-   git clone https://github.com/Pheluciam/cdc-nt-gtfs-project.git
-   cd cdc-nt-gtfs-project
-   ```
+### Overview
 
-2. Create the Python virtual environment and install dependencies:
+![Overview page](screenshots/01_overview.png)
 
-   ```bash
-   python -m venv dbt_venv
-   ./dbt_venv/Scripts/Activate.ps1   # Windows PowerShell
-   # or: source dbt_venv/bin/activate  # macOS/Linux
-   pip install dbt-postgres
-   ```
+Headline KPIs across both networks — 2 agencies, 83 routes, 2,070 trips, 768
+stops and 46,606 stop visits — with Trips by Agency and a Trip-Volume-by-Route
+treemap.
 
-3. Configure database connection:
-   - Create a Postgres database called `CDC_NT`
-   - Configure `~/.dbt/profiles.yml` with your connection details (see `profiles.yml.example` if provided)
+### Network Coverage
 
-4. Ingest the GTFS source data:
+![Network Coverage page](screenshots/02_network_coverage.png)
 
-   ```bash
-   python ingestion/ingest_gtfs.py
-   ```
+Geographic distribution of stops across both NT networks. The map proves the
+multi-feed pipeline works — two clusters roughly 1,500 km apart (Darwin in the
+north, Alice Springs in the central NT) — alongside routes- and stops-per-agency
+donuts.
 
-5. Run dbt to build the warehouse models:
+### Service Operations
 
-   ```bash
-   dbt run
-   dbt test
-   ```
+![Service Operations page](screenshots/03_service_operations.png)
 
-6. Open `CDC_NT Transport Project.pbix` in Power BI Desktop and refresh.
+When the networks run — by time band and day of week. Both networks show flat
+day-of-week patterns, suggesting consistent service rather than typical commuter
+peaks.
 
----
+### Multi-Feed Comparison
 
-## Documentation
+![Multi-Feed Comparison page](screenshots/04_multi_feed_comparison.png)
 
-This repo contains several documents that go deeper than this README:
+Darwin vs Alice Springs side-by-side. Darwin is roughly an order of magnitude
+larger across routes, stops and stop-visits, yet average trip distances are
+nearly identical (9.17 km vs 9.55 km) — both networks follow urban-style design
+despite the size difference.
 
-- **`LEARNINGS.md`** — running journal of lessons learned, mistakes & diagnoses (the multi-feed key collision, GTFS extended hours, dbt vs Power BI architectural decisions, etc.).
-- **`NEXT_PROJECT.md`** — planning document for project #2 (cloud-native rebuild, supply chain / demand planning domain, MS SQL Server / Databricks / Airflow exploration)
-- **`PROJECT_CONTEXT.md`** — current state, working notes, and immediate next steps. Used as a session-restart anchor
+## Related projects
 
----
+Part of a three-project data-engineering portfolio:
 
-## Status
+- **Project #1 — CDC NT Transport Analytics** *(this one)* — dbt-first pipeline on PostgreSQL → Power BI; Kimball modelling foundation.
+- **Project #2 — Retail Demand & Forecasting** — cloud warehouse + orchestration: Azure SQL → Snowflake → Airflow (Docker) → dbt → Power BI, with a Cortex forecast layer.
+- **Project #3 — S&P 100 Financial Analytics Lakehouse** — AWS-native lakehouse: S3 + Glue + Athena + Iceberg, dbt-athena, Step Functions, 6-page Power BI, keyless OIDC CI/CD.
 
-**v1 — Complete.** All 4 dashboard pages built, dbt models tested, documentation in place, repo public on GitHub.
+## Author
 
-This is my first end-to-end data engineering project, completed as a portfolio piece. Trade-offs accepted in v1 (manual pipeline, no orchestration, no CI/CD) are documented and addressed in `NEXT_PROJECT.md` as deliberate scope decisions for the next project.
-
----
-
-## Notes for reviewers
-
-- **Engineering focus**: this project is intended to demonstrate data engineering practice — the warehouse design, multi-source integration, dbt modelling, and SQL quality matter more than the dashboard polish
-- **Real-world data quirks handled** (GTFS extended hours, multi-feed ID collisions) are documented in `LEARNINGS.md`
-- **What v1 deliberately doesn't include** (orchestration, CI/CD, cloud warehouse) is captured in `NEXT_PROJECT.md` as project #2 features
-- The pipeline is currently manual. Orchestration via Airflow is the headline feature planned for project #2
+Phil McKechnie — Business Intelligence Analyst & Developer, Melbourne. 15+ years across operations, supply chain and analytics; the last 5 in dedicated BI roles (SQL, Tableau, Power BI). Building a data-engineering portfolio across dbt, cloud warehouses and AWS-native lakehouse work.
